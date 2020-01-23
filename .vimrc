@@ -17,12 +17,13 @@ Plugin 'tpope/vim-fugitive'
 "Plugin 'vim-python/python-syntax'
 Plugin 'Valloric/YouCompleteMe'
 " Syntax
-Plugin 'vim-syntastic/syntastic'
+"Plugin 'vim-syntastic/syntastic'
 " Python Style Guide
 Plugin 'nvie/vim-flake8'
 " Color Scheme
 Plugin 'jnurmine/Zenburn'
 Plugin 'lifepillar/vim-solarized8'
+Plugin 'morhetz/gruvbox'
 
 "Autoformatter
 Plugin 'psf/black'
@@ -33,8 +34,6 @@ Plugin 'scrooloose/nerdtree'
 Plugin 'junegunn/fzf'
 "auto-indent
 Plugin 'vim-scripts/indentpython.vim'
-"text search
-"Plugin 'burntsushi/ripgrep'
 "text search
 Plugin 'jremmen/vim-ripgrep'
 
@@ -49,6 +48,12 @@ Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
 "Plugin 'powerline/powerline'
 "airline
 Plugin 'vim-airline/vim-airline'
+"ALE syntax and fixer
+Plugin 'dense-analysis/ale'
+"Bracket coloring
+Plugin 'frazrepo/vim-rainbow'
+"Auto complete brackets
+Plugin 'jiangmiao/auto-pairs'
 
 
 " Install L9 and avoid a Naming conflict if you've already installed a
@@ -69,18 +74,34 @@ filetype plugin indent on    " required
 "
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
+" Ale Config
+let b:ale_linters = ['flake8', 'cucumber']
+let g:ale_linters = {'python': ['flake8', 'cucumber']}
+let b:ale_fixers = ['autopep8']
+let g:ale_fixers = {'*': ['remove_trailing_lines', 'trim_whitespace'], 'python': ['autopep8']}
+
+let g:ale_linters_explicit = 1
+let g:ale_python_flake8_options = '--ignore=E501,F403,F405, max-character-count=350'
+let g:ale_fix_on_save = 1
+"Rainbow
+let g:rainbow_active = 1
+
+"Nerd tree toggle open
+nmap <F6> :NERDTreeToggle<CR>
+
 " Syntastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-let g:syntastic_aggregate_errors = 1
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 0 
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
+"set statusline+=%#warningmsg#
+"set statusline+=%{SyntasticStatuslineFlag()}
+"set statusline+=%*
+"let g:syntastic_aggregate_errors = 1
+"let g:syntastic_always_populate_loc_list = 1
+"let g:syntastic_auto_loc_list = 0
+"let g:syntastic_check_on_open = 1
+"let g:syntastic_check_on_wq = 0
 
 "YouCompleteMe Variables
 let g:ycm_autoclose_preview_window_after_completion=1
+let g:ycm_min_num_of_chars_for_completion = 99
 map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 " python highlighting
 let python_highlight_all=1
@@ -90,8 +111,9 @@ if has('gui_running')
   set background=dark
   colorscheme solarized
 else
-  "colorscheme zenburn 
-  colorscheme solarized8_high
+  "colorscheme zenburn
+  "colorscheme solarized8_high
+  colorscheme gruvbox
 endif
 
 "line numbering
@@ -115,7 +137,7 @@ au BufNewFile,BufRead *.js, *.html, *.css
     \ set shiftwidth=2
 
 au BufNewFile, BufRead *.feature
-     \ set tabstop=2
+    \ set tabstop=2
     \ set softtabstop=2
     \ set shiftwidth=2
     \ set textwidth=79
@@ -136,80 +158,92 @@ nmap <S-P> :Rg
 let g:rg_command = 'rg --vimgrep -S'
 let g:rg_highlight = 'true'
 "Powerline config
-set laststatus=2
-let g:Powerline_symbols = 'fancy'
-set showtabline=2
-"you_complete_me completion text before popup
- let g:ycm_min_num_of_chars_for_completion = 99 
- "numbering tabs
- set tabline=%!MyTabLine()  " custom tab pages line
-function MyTabLine()
-        let s = '' " complete tabline goes here
-        " loop through each tab page
-        for t in range(tabpagenr('$'))
-                " set highlight
-                if t + 1 == tabpagenr()
-                        let s .= '%#TabLineSel#'
-                else
-                        let s .= '%#TabLine#'
-                endif
-                " set the tab page number (for mouse clicks)
-                let s .= '%' . (t + 1) . 'T'
-                let s .= ' '
-                " set page number string
-                let s .= t + 1 . ' '
-                " get buffer names and statuses
-                let n = ''      "temp string for buffer names while we loop and check buftype
-                let m = 0       " &modified counter
-                let bc = len(tabpagebuflist(t + 1))     "counter to avoid last ' '
-                " loop through each buffer in a tab
-                for b in tabpagebuflist(t + 1)
-                        " buffer types: quickfix gets a [Q], help gets [H]{base fname}
-                        " others get 1dir/2dir/3dir/fname shortened to 1/2/3/fname
-                        if getbufvar( b, "&buftype" ) == 'help'
-                                let n .= '[H]' . fnamemodify( bufname(b), ':t:s/.txt$//' )
-                        elseif getbufvar( b, "&buftype" ) == 'quickfix'
-                                let n .= '[Q]'
-                        else
-                                let n .= pathshorten(bufname(b))
-                        endif
-                        " check and ++ tab's &modified count
-                        if getbufvar( b, "&modified" )
-                                let m += 1
-                        endif
-                        " no final ' ' added...formatting looks better done later
-                        if bc > 1
-                                let n .= ' '
-                        endif
-                        let bc -= 1
-                endfor
-                " add modified label [n+] where n pages in tab are modified
-                if m > 0
-                        let s .= '[' . m . '+]'
-                endif
-                " select the highlighting for the buffer names
-                " my default highlighting only underlines the active tab
-                " buffer names.
-                if t + 1 == tabpagenr()
-                        let s .= '%#TabLineSel#'
-                else
-                        let s .= '%#TabLine#'
-                endif
-                " add buffer names
-                if n == ''
-                        let s.= '[New]'
-                else
-                        let s .= n
-                endif
-                " switch to no underlining and add final space to buffer list
-                let s .= ' '
-        endfor
-        " after the last tab fill with TabLineFill and reset tab page nr
-        let s .= '%#TabLineFill#%T'
-        " right-align the label to close the current tab page
-        if tabpagenr('$') > 1
-                let s .= '%=%#TabLineFill#%999Xclose'
-        endif
-        return s
-endfunction
+"set laststatus=2
+"let g:Powerline_symbols = 'fancy'
+"set showtabline=2
 
+"airline settings
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#formatter = 'jsformatter'
+
+ "numbering tabs
+" set tabline=%!MyTabLine()  " custom tab pages line
+"function MyTabLine()
+"        let s = '' " complete tabline goes here
+"        " loop through each tab page
+"        for t in range(tabpagenr('$'))
+"                " set highlight
+"                if t + 1 == tabpagenr()
+"                        let s .= '%#TabLineSel#'
+"                else
+"                        let s .= '%#TabLine#'
+"                endif
+"                " set the tab page number (for mouse clicks)
+"                let s .= '%' . (t + 1) . 'T'
+"                let s .= ' '
+"                " set page number string
+"                let s .= t + 1 . ' '
+"                " get buffer names and statuses
+"                let n = ''      "temp string for buffer names while we loop and check buftype
+"                let m = 0       " &modified counter
+"                let bc = len(tabpagebuflist(t + 1))     "counter to avoid last ' '
+"                " loop through each buffer in a tab
+"                for b in tabpagebuflist(t + 1)
+"                        " buffer types: quickfix gets a [Q], help gets [H]{base fname}
+"                        " others get 1dir/2dir/3dir/fname shortened to 1/2/3/fname
+"                        if getbufvar( b, "&buftype" ) == 'help'
+"                                let n .= '[H]' . fnamemodify( bufname(b), ':t:s/.txt$//' )
+"                        elseif getbufvar( b, "&buftype" ) == 'quickfix'
+"                                let n .= '[Q]'
+"                        else
+"                                let n .= pathshorten(bufname(b))
+"                        endif
+"                        " check and ++ tab's &modified count
+"                        if getbufvar( b, "&modified" )
+"                                let m += 1
+"                        endif
+"                        " no final ' ' added...formatting looks better done later
+"                        if bc > 1
+"                                let n .= ' '
+"                        endif
+"                        let bc -= 1
+"                endfor
+"                " add modified label [n+] where n pages in tab are modified
+"                if m > 0
+"                        let s .= '[' . m . '+]'
+"                endif
+"                " select the highlighting for the buffer names
+"                " my default highlighting only underlines the active tab
+"                " buffer names.
+"                if t + 1 == tabpagenr()
+"                        let s .= '%#TabLineSel#'
+"                else
+"                        let s .= '%#TabLine#'
+"                endif
+"                " add buffer names
+"                if n == ''
+"                        let s.= '[New]'
+"                else
+"                        let s .= n
+"                endif
+"                " switch to no underlining and add final space to buffer list
+"                let s .= ' '
+"        endfor
+"        " after the last tab fill with TabLineFill and reset tab page nr
+"        let s .= '%#TabLineFill#%T'
+"        " right-align the label to close the current tab page
+"        if tabpagenr('$') > 1
+"                let s .= '%=%#TabLineFill#%999Xclose'
+"        endif
+"        return s
+"endfunction
+
+" use mouse scroll
+set mouse=a
+" move code down or up a line
+nnoremap <A-j> :m .+1<CR>==
+nnoremap <A-k> :m .-2<CR>==
+inoremap <A-j> <Esc>:m .+1<CR>==gi
+inoremap <A-k> <Esc>:m .-2<CR>==gi
+vnoremap <A-j> :m '>+1<CR>gv=gv
+vnoremap <A-k> :m '<-2<CR>gv=gv
