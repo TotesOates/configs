@@ -14,36 +14,36 @@ Plugin 'VundleVim/Vundle.vim'
 " Keep Plugin commands between vundle#begin/end.
 " plugin on GitHub repo
 Plugin 'tpope/vim-fugitive'
-"Plugin 'vim-python/python-syntax'
+Plugin 'airblade/vim-gitgutter'
+
 Plugin 'Valloric/YouCompleteMe'
 " Syntax
+"Plugin 'vim-python/python-syntax'
 "Plugin 'vim-syntastic/syntastic'
+
 " Python Style Guide
-Plugin 'nvie/vim-flake8'
+"Plugin 'nvie/vim-flake8'
+"Autoformatter
+"Plugin 'psf/black'
+
 " Color Scheme
 Plugin 'jnurmine/Zenburn'
 Plugin 'lifepillar/vim-solarized8'
 Plugin 'morhetz/gruvbox'
+Plugin 'vim-airline/vim-airline-themes'
 
-"Autoformatter
-Plugin 'psf/black'
-
+"GoToDefinition
+Plugin 'ludovicchabant/vim-gutentags'
 "file tree browsing
 Plugin 'scrooloose/nerdtree'
 "super search
 Plugin 'junegunn/fzf'
-"auto-indent
-Plugin 'vim-scripts/indentpython.vim'
 "text search
 Plugin 'jremmen/vim-ripgrep'
 
-" plugin from http://vim-scripts.org/vim/scripts.html
-" Plugin 'L9'
 " Git plugin not hosted on GitHub
-Plugin 'git://git.wincent.com/command-t.git'
-" The sparkup vim script is in a subdirectory of this repo called vim.
-" Pass the path to set the runtimepath properly.
-Plugin 'rstacruz/sparkup', {'rtp': 'vim/'}
+"Plugin 'git://git.wincent.com/command-t.git'
+
 "powerline, install git and current env bar
 "Plugin 'powerline/powerline'
 "airline
@@ -75,19 +75,21 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 " Ale Config
-let b:ale_linters = ['flake8', 'cucumber']
-let g:ale_linters = {'python': ['flake8', 'cucumber']}
-let b:ale_fixers = ['autopep8']
-let g:ale_fixers = {'*': ['remove_trailing_lines', 'trim_whitespace'], 'python': ['autopep8']}
+let g:ale_linters = {'python': ['flake8'], 'cucumber': ['cucumber']}
+let g:ale_fixers = { '*': ['remove_trailing_lines', 'trim_whitespace'], 'python': ['autopep8', 'remove_trailing_lines', 'trim_whitespace'] }
 
-let g:ale_linters_explicit = 1
-let g:ale_python_flake8_options = '--ignore=E501,F403,F405, max-character-count=350'
+let g:ale_sign_error = '✘'
+let g:ale_sign_warning = '⚠'
+highlight ALEErrorSign ctermbg=NONE ctermfg=red
+highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
+let g:ale_python_flake8_options = '--max-line-length 200 --ignore E501,F403,F405'
+let g:ale_python_autopep8_options = '--max-line-length 200 --ignore E501 --aggressive --aggressive --aggressive'
 let g:ale_fix_on_save = 1
 "Rainbow
 let g:rainbow_active = 1
 
 "Nerd tree toggle open
-nmap <F6> :NERDTreeToggle<CR>
+nmap <F1> :NERDTreeToggle<CR>
 
 " Syntastic
 "set statusline+=%#warningmsg#
@@ -101,7 +103,7 @@ nmap <F6> :NERDTreeToggle<CR>
 
 "YouCompleteMe Variables
 let g:ycm_autoclose_preview_window_after_completion=1
-let g:ycm_min_num_of_chars_for_completion = 99
+let g:ycm_min_num_of_chars_for_completion = 2
 map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 " python highlighting
 let python_highlight_all=1
@@ -115,26 +117,27 @@ else
   "colorscheme solarized8_high
   colorscheme gruvbox
 endif
+"let g:gruvbox_contrast_dark = 'hard'
 
 "line numbering
 set nu
 "utf-8
 set encoding=utf-8
 "flag whitespace
-au BufRead, BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
-"pep8 indentation
-    \ set tabstop=4
-    \ set softtabstop=4
-    \ set shiftwidth=4
-    \ set textwidth=79
-    \ set expandtab
-    \ set autoindent
-    \ set fileformat=unix
-"html, js, css indentation
-au BufNewFile,BufRead *.js, *.html, *.css
-    \ set tabstop=2
-    \ set softtabstop=2
-    \ set shiftwidth=2
+"au BufRead, BufNewFile *.py,*.pyw,*.c,*.h match BadWhitespace /\s\+$/
+""pep8 indentation
+"    \ set tabstop=4
+"    \ set softtabstop=4
+"    \ set shiftwidth=4
+"    \ set textwidth=79
+"    \ set expandtab
+"    \ set autoindent
+"    \ set fileformat=unix
+""html, js, css indentation
+"au BufNewFile,BufRead *.js, *.html, *.css
+"    \ set tabstop=2
+"    \ set softtabstop=2
+"    \ set shiftwidth=2
 
 au BufNewFile, BufRead *.feature
     \ set tabstop=2
@@ -149,6 +152,10 @@ au BufNewFile, BufRead *.feature
 "This unsets the "last search pattern" register by hitting return
 set ic
 set hls is
+"swap file location
+set directory=~/.vim/swapfiles//
+set backupdir=~/.vim/backupdir//
+set undodir=~/.vim/undo//
 nnoremap <CR> :noh<CR><CR>
 "maps to control + p to open up :FZF fuzzy search
 nmap <C-P> :FZF<CR>
@@ -164,86 +171,16 @@ let g:rg_highlight = 'true'
 
 "airline settings
 let g:airline#extensions#tabline#enabled = 1
-let g:airline#extensions#tabline#formatter = 'jsformatter'
-
- "numbering tabs
-" set tabline=%!MyTabLine()  " custom tab pages line
-"function MyTabLine()
-"        let s = '' " complete tabline goes here
-"        " loop through each tab page
-"        for t in range(tabpagenr('$'))
-"                " set highlight
-"                if t + 1 == tabpagenr()
-"                        let s .= '%#TabLineSel#'
-"                else
-"                        let s .= '%#TabLine#'
-"                endif
-"                " set the tab page number (for mouse clicks)
-"                let s .= '%' . (t + 1) . 'T'
-"                let s .= ' '
-"                " set page number string
-"                let s .= t + 1 . ' '
-"                " get buffer names and statuses
-"                let n = ''      "temp string for buffer names while we loop and check buftype
-"                let m = 0       " &modified counter
-"                let bc = len(tabpagebuflist(t + 1))     "counter to avoid last ' '
-"                " loop through each buffer in a tab
-"                for b in tabpagebuflist(t + 1)
-"                        " buffer types: quickfix gets a [Q], help gets [H]{base fname}
-"                        " others get 1dir/2dir/3dir/fname shortened to 1/2/3/fname
-"                        if getbufvar( b, "&buftype" ) == 'help'
-"                                let n .= '[H]' . fnamemodify( bufname(b), ':t:s/.txt$//' )
-"                        elseif getbufvar( b, "&buftype" ) == 'quickfix'
-"                                let n .= '[Q]'
-"                        else
-"                                let n .= pathshorten(bufname(b))
-"                        endif
-"                        " check and ++ tab's &modified count
-"                        if getbufvar( b, "&modified" )
-"                                let m += 1
-"                        endif
-"                        " no final ' ' added...formatting looks better done later
-"                        if bc > 1
-"                                let n .= ' '
-"                        endif
-"                        let bc -= 1
-"                endfor
-"                " add modified label [n+] where n pages in tab are modified
-"                if m > 0
-"                        let s .= '[' . m . '+]'
-"                endif
-"                " select the highlighting for the buffer names
-"                " my default highlighting only underlines the active tab
-"                " buffer names.
-"                if t + 1 == tabpagenr()
-"                        let s .= '%#TabLineSel#'
-"                else
-"                        let s .= '%#TabLine#'
-"                endif
-"                " add buffer names
-"                if n == ''
-"                        let s.= '[New]'
-"                else
-"                        let s .= n
-"                endif
-"                " switch to no underlining and add final space to buffer list
-"                let s .= ' '
-"        endfor
-"        " after the last tab fill with TabLineFill and reset tab page nr
-"        let s .= '%#TabLineFill#%T'
-"        " right-align the label to close the current tab page
-"        if tabpagenr('$') > 1
-"                let s .= '%=%#TabLineFill#%999Xclose'
-"        endif
-"        return s
-"endfunction
-
+let g:airline#extensions#tabline#formatter = 'unique_tail'
+"let g:airline_theme='<theme>'
 " use mouse scroll
 set mouse=a
 " move code down or up a line
-nnoremap <A-j> :m .+1<CR>==
-nnoremap <A-k> :m .-2<CR>==
-inoremap <A-j> <Esc>:m .+1<CR>==gi
-inoremap <A-k> <Esc>:m .-2<CR>==gi
-vnoremap <A-j> :m '>+1<CR>gv=gv
-vnoremap <A-k> :m '<-2<CR>gv=gv
+nnoremap <C-j> :m .+1<CR>==
+nnoremap <C-k> :m .-2<CR>==
+inoremap <C-j> <Esc>:m .+1<CR>==gi
+inoremap <C-k> <Esc>:m .-2<CR>==gi
+vnoremap <C-j> :m '>+1<CR>gv=gv
+vnoremap <C-k> :m '<-2<CR>gv=gv
+"gutentags directory
+let g:gutentags_cache_dir='~/.vim/tags'
