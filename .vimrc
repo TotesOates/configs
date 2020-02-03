@@ -146,6 +146,7 @@ au BufNewFile, BufRead *.feature
     \ set textwidth=79
     \ set expandtab
     \ set autoindent
+    \ set smartindent
     \ set fileformat=unix
 "Standard VIM settings
 "search highlight
@@ -175,6 +176,11 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'
 "let g:airline_theme='<theme>'
 " use mouse scroll
 set mouse=a
+"copy paste
+vmap <C-c> "+yi
+vmap <C-x> "+c
+vmap <C-v> c<ESC>"+p
+imap <C-v> <ESC>"+pa
 " move code down or up a line
 nnoremap <C-j> :m .+1<CR>==
 nnoremap <C-k> :m .-2<CR>==
