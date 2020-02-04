@@ -37,9 +37,10 @@ Plugin 'ludovicchabant/vim-gutentags'
 "file tree browsing
 Plugin 'scrooloose/nerdtree'
 "super search
+Plugin 'junegunn/fzf.vim'
 Plugin 'junegunn/fzf'
 "text search
-Plugin 'jremmen/vim-ripgrep'
+"Plugin 'jremmen/vim-ripgrep'
 
 " Git plugin not hosted on GitHub
 "Plugin 'git://git.wincent.com/command-t.git'
@@ -54,7 +55,8 @@ Plugin 'dense-analysis/ale'
 Plugin 'frazrepo/vim-rainbow'
 "Auto complete brackets
 Plugin 'jiangmiao/auto-pairs'
-
+"preview syntax highlight
+Plugin 'bats.vim'
 
 " Install L9 and avoid a Naming conflict if you've already installed a
 " different version somewhere else.
@@ -82,8 +84,8 @@ let g:ale_sign_error = '✘'
 let g:ale_sign_warning = '⚠'
 highlight ALEErrorSign ctermbg=NONE ctermfg=red
 highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
-let g:ale_python_flake8_options = '--max-line-length 200 --ignore E501,F403,F405'
-let g:ale_python_autopep8_options = '--max-line-length 200 --ignore E501 --aggressive --aggressive --aggressive'
+let g:ale_python_flake8_options = '--max-line-length 200 --ignore E501,F403,F405,E252,W605'
+let g:ale_python_autopep8_options = '--max-line-length 200 --ignore E501,E252,W605 --aggressive --aggressive --aggressive'
 let g:ale_fix_on_save = 1
 "Rainbow
 let g:rainbow_active = 1
@@ -159,12 +161,19 @@ set backupdir=~/.vim/backupdir//
 set undodir=~/.vim/undo//
 nnoremap <CR> :noh<CR><CR>
 "maps to control + p to open up :FZF fuzzy search
-nmap <C-P> :FZF<CR>
+"nmap <C-P> :FZF<CR>
+set rtp+=/usr/local/bin/fzf
+let $FZF_DEFAULT_COMMAND='rg --files --smart-case'
+nnoremap <C-p> :Files<Cr>
+command! -bang -nargs=? -complete=dir Files
+    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
+  \   fzf#vim#with_preview(), <bang>0)
+let g:fzf_layout = {'down': '100%', 'window': 'enew'}
 "maps to shift + p to open up ripgrep text search
 nmap <S-P> :Rg
-"ripgrep smart search case sensitivity
-let g:rg_command = 'rg --vimgrep -S'
-let g:rg_highlight = 'true'
 "Powerline config
 "set laststatus=2
 "let g:Powerline_symbols = 'fancy'
