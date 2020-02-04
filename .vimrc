@@ -55,8 +55,6 @@ Plugin 'dense-analysis/ale'
 Plugin 'frazrepo/vim-rainbow'
 "Auto complete brackets
 Plugin 'jiangmiao/auto-pairs'
-"preview syntax highlight
-Plugin 'bats.vim'
 
 " Install L9 and avoid a Naming conflict if you've already installed a
 " different version somewhere else.
