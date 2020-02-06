@@ -6,3 +6,4 @@ brew install fzf
 brew install ripgrep
 brew install autopep8
 brew install black
+brew install pgcli
