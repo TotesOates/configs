@@ -1,8 +1,9 @@
 need to create a .vim directory for vundle to bundle stuff into
-**Dependencies for vim**
+**Dependencies for vim** AKA stuff that needs to be installed to work
 brew install bat
-flake8
 brew install fzf
 brew install ripgrep
-brew install autopep8
 brew install black
+brew install pgcli
+pip3 install autopep8
+pip3 install flake8
