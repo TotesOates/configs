@@ -27,11 +27,10 @@ Plugin 'Valloric/YouCompleteMe'
 "Plugin 'psf/black'
 
 " Color Scheme
-Plugin 'jnurmine/Zenburn'
-Plugin 'lifepillar/vim-solarized8'
+"Plugin 'jnurmine/Zenburn'
+"Plugin 'lifepillar/vim-solarized8'
 Plugin 'morhetz/gruvbox'
 Plugin 'vim-airline/vim-airline-themes'
-
 "GoToDefinition
 Plugin 'ludovicchabant/vim-gutentags'
 "file tree browsing
@@ -91,16 +90,6 @@ let g:rainbow_active = 1
 "Nerd tree toggle open
 nmap <F1> :NERDTreeToggle<CR>
 
-" Syntastic
-"set statusline+=%#warningmsg#
-"set statusline+=%{SyntasticStatuslineFlag()}
-"set statusline+=%*
-"let g:syntastic_aggregate_errors = 1
-"let g:syntastic_always_populate_loc_list = 1
-"let g:syntastic_auto_loc_list = 0
-"let g:syntastic_check_on_open = 1
-"let g:syntastic_check_on_wq = 0
-
 "YouCompleteMe Variables
 let g:ycm_autoclose_preview_window_after_completion=1
 let g:ycm_min_num_of_chars_for_completion = 2
@@ -110,13 +99,14 @@ let python_highlight_all=1
 syntax on
 "color schemes
 if has('gui_running')
-  set background=dark
   colorscheme solarized
 else
   "colorscheme zenburn
-  "colorscheme solarized8_high
+  "colorscheme solarized8_low
   colorscheme gruvbox
+  set background=dark
 endif
+
 "let g:gruvbox_contrast_dark = 'hard'
 
 "line numbering
@@ -162,7 +152,7 @@ nnoremap <CR> :noh<CR><CR>
 "nmap <C-P> :FZF<CR>
 set rtp+=/usr/local/bin/fzf
 let $FZF_DEFAULT_COMMAND='rg --files --smart-case'
-nnoremap <C-p> :Files<Cr>
+nnoremap <leader>f :Files<Cr>
 command! -bang -nargs=? -complete=dir Files
     \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
 command! -bang -nargs=* Rg
@@ -171,7 +161,7 @@ command! -bang -nargs=* Rg
   \   fzf#vim#with_preview(), <bang>0)
 let g:fzf_layout = {'down': '100%', 'window': 'enew'}
 "maps to shift + p to open up ripgrep text search
-nmap <S-P> :Rg
+nmap <leader>w :Rg<Cr>
 "Powerline config
 "set laststatus=2
 "let g:Powerline_symbols = 'fancy'
@@ -197,3 +187,4 @@ vnoremap <C-j> :m '>+1<CR>gv=gv
 vnoremap <C-k> :m '<-2<CR>gv=gv
 "gutentags directory
 let g:gutentags_cache_dir='~/.vim/tags'
+let g:gutentags_trace = 1
