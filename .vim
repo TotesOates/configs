@@ -7,3 +7,4 @@ brew install black
 brew install pgcli
 pip3 install autopep8
 pip3 install flake8
+brew install --HEAD universal-ctags/universal-ctags/universal-ctags
