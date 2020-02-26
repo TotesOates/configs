@@ -27,10 +27,11 @@ Plugin 'Valloric/YouCompleteMe'
 "Plugin 'psf/black'
 
 " Color Scheme
-"Plugin 'jnurmine/Zenburn'
+Plugin 'jnurmine/Zenburn'
 "Plugin 'lifepillar/vim-solarized8'
 Plugin 'morhetz/gruvbox'
 Plugin 'vim-airline/vim-airline-themes'
+Plugin 'srcery-colors/srcery-vim'
 "GoToDefinition
 Plugin 'ludovicchabant/vim-gutentags'
 "file tree browsing
@@ -98,15 +99,22 @@ map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 let python_highlight_all=1
 syntax on
 "color schemes
+set termguicolors
+set t_Co=256
 if has('gui_running')
   colorscheme solarized
 else
   "colorscheme zenburn
-  "colorscheme solarized8_low
-  colorscheme gruvbox
+  colorscheme srcery
+ "colorscheme solarized8_low
+  "colorscheme gruvbox
   set background=dark
 endif
-
+let g:srcery_italic = 0
+let g:srcery_inverse_matches = 1
+let g:srcery_bold = 1
+let g:srcery_inverse = 1
+"
 "let g:gruvbox_contrast_dark = 'hard'
 
 "line numbering
@@ -149,7 +157,6 @@ set backupdir=~/.vim/backupdir//
 set undodir=~/.vim/undo//
 nnoremap <CR> :noh<CR><CR>
 "maps to control + p to open up :FZF fuzzy search
-"nmap <C-P> :FZF<CR>
 set rtp+=/usr/local/bin/fzf
 let $FZF_DEFAULT_COMMAND='rg --files --smart-case'
 nnoremap <leader>f :Files<Cr>
@@ -159,7 +166,7 @@ command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
   \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
   \   fzf#vim#with_preview(), <bang>0)
-let g:fzf_layout = {'down': '100%', 'window': 'enew'}
+let g:fzf_layout = {'down': '100%', 'window': '-tabnew'}
 "maps to shift + p to open up ripgrep text search
 nmap <leader>w :Rg<Cr>
 "Powerline config
@@ -168,16 +175,18 @@ nmap <leader>w :Rg<Cr>
 "set showtabline=2
 
 "airline settings
-let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#enabled = 0
+let g:airline#extensions#tabline#left_sep = ' '
+let g:airline#extensions#tabline#left_alt_sep = '|'
+
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 "let g:airline_theme='<theme>'
 " use mouse scroll
 set mouse=a
 "copy paste
-vmap <C-c> "+yi
-vmap <C-x> "+c
-vmap <C-v> c<ESC>"+p
-imap <C-v> <ESC>"+pa
+vmap <D-c> "+y
+vmap <D-x> "+c
+vmap <D-v> "+p
 " move code down or up a line
 nnoremap <C-j> :m .+1<CR>==
 nnoremap <C-k> :m .-2<CR>==
@@ -187,4 +196,8 @@ vnoremap <C-j> :m '>+1<CR>gv=gv
 vnoremap <C-k> :m '<-2<CR>gv=gv
 "gutentags directory
 let g:gutentags_cache_dir='~/.vim/tags'
-let g:gutentags_trace = 1
+"let g:gutentags_trace = 1
+"guard xtermmouse
+if !has('nvim')
+    set ttymouse=xterm2
+endif
