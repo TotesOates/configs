@@ -1,13 +1,16 @@
 # If you come from bash you might have to change your $PATH.
 #export PATH=$HOME/bin:/usr/local/bin:$PATH
 export PATH=/Users/joe.chen/Library/Python/3.8/bin:$PATH
+export PATH=/Users/joe.chen/Library/Python:$PATH
 export PYTHONPATH=~/dev/automate_me/
 export PATH=/Users/joe.chen/Dev/automate_me/lib/python3.8/site-packages:$PATH
+export PATH=/usr/local/bin:$PATH
+export PATH=/usr/local:$PATH
+export PATH=/usr/local/lib:$PATH
 # Path to your oh-my-zsh installation.
 export ZSH="/Users/joe.chen/.oh-my-zsh"
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
-export PATH="/Users/joe.chen/Library/Python/2.7/bin:$PATH"
 export PATH="/Users/joe.chen/bin:$PATH"
 export PATH="/Users/joe.chen/notify_me:$PATH"
 export PATH="/Users/joe.chen:$PATH"
@@ -113,7 +116,27 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-export PATH="/usr/local/opt/postgresql@9.6/bin:$PATH"
-
+#export PATH="/usr/local/opt/postgresql@9.6/bin:$PATH"
 export NVM_DIR="/Users/joe.chen/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+export PATH="~/.npm:$PATH"
+export PATH="~/.nvm:$PATH"
+export PATH="/usr/local/opt/libpq:$PATH"
+export PATH="/usr/local/Cellar/libpq/12.1_1/bin:$PATH"
+#export PATH="~/.nvm/versions/node:$PATH"
+#
+export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --no-ignore-vcs'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+alias fzfi='rg --files --hidden --follow --no-ignore-vcs -g "!{node_modules,.git}" | fzf'
+alias vifi='vim $(fzfi)'
+
+
+
+ecrtt(){
+	tag=${1:-latest}
+	aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 600375142316.dkr.ecr.us-east-1.amazonaws.com
+	cd ~/dev/devops/docker/twilio-tester
+	container_id=$(docker build --force-rm -t twilio-tester . | grep 'Successfully built' | awk '{print $3}')
+	docker tag $container_id 600375142316.dkr.ecr.us-east-1.amazonaws.com/twilio-tester:$tag
+	docker push 600375142316.dkr.ecr.us-east-1.amazonaws.com/twilio-tester:$tag
+}

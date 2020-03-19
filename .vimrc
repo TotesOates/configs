@@ -35,7 +35,10 @@ Plugin 'srcery-colors/srcery-vim'
 "GoToDefinition
 Plugin 'ludovicchabant/vim-gutentags'
 "file tree browsing
-Plugin 'scrooloose/nerdtree'
+"Plugin 'scrooloose/nerdtree'
+Plugin 'preservim/nerdtree'
+Plugin 'Xuyuanp/nerdtree-git-plugin'
+
 "super search
 Plugin 'junegunn/fzf.vim'
 Plugin 'junegunn/fzf'
@@ -90,7 +93,19 @@ let g:rainbow_active = 1
 
 "Nerd tree toggle open
 nmap <F1> :NERDTreeToggle<CR>
+"nerdtree open to current opened file
+nnoremap <silent> <Leader>v :NERDTreeFind<CR>
+let NERDTreeQuitOnOpen = 1
+let NERDTreeShowHidden=1
 
+"nerd tree open by default
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
 "YouCompleteMe Variables
 let g:ycm_autoclose_preview_window_after_completion=1
 let g:ycm_min_num_of_chars_for_completion = 2
@@ -169,6 +184,10 @@ command! -bang -nargs=* Rg
 let g:fzf_layout = {'down': '100%', 'window': '-tabnew'}
 "maps to shift + p to open up ripgrep text search
 nmap <leader>w :Rg<Cr>
+"search for things everything that isn't node_modules or in gitignore
+command! -bang -nargs=*  All
+  \ call fzf#run(fzf#wrap({'source': 'rg --files --hidden --no-ignore-vcs --glob "!{node_modules/*,.git/*}"', 'down': '40%', 'options': '--expect=ctrl-t,ctrl-x,ctrl-v --multi --reverse' }))
+nnoremap <silent> <leader>o :All<cr>
 "Powerline config
 "set laststatus=2
 "let g:Powerline_symbols = 'fancy'
@@ -184,9 +203,10 @@ let g:airline#extensions#tabline#formatter = 'unique_tail'
 " use mouse scroll
 set mouse=a
 "copy paste
-vmap <D-c> "+y
-vmap <D-x> "+c
-vmap <D-v> "+p
+vmap <C-c> "+yi
+vmap <C-x> "+c
+vmap <C-v> c<ESC>"+p
+imap <C-v> <ESC>"+pa
 " move code down or up a line
 nnoremap <C-j> :m .+1<CR>==
 nnoremap <C-k> :m .-2<CR>==
@@ -201,3 +221,9 @@ let g:gutentags_cache_dir='~/.vim/tags'
 if !has('nvim')
     set ttymouse=xterm2
 endif
+"Switch between terminal and vim, ctrl+d to enter terminal and ctrl+d to
+"return to vim
+noremap <C-d> :sh<cr>
+tnoremap <ESC> <C-w>:q!<CR>
+"git fugitive
+set diffopt+=vertical
