@@ -20,6 +20,9 @@ alias act='source bin/activate'
 alias deact='deactivate'
 alias api='cd nc/api/test_suite/exp_suite'
 alias ui='cd nc/ui/test_suite/exp_suite'
+alias psql96='/usr/local/Cellar/postgresql@9.6/9.6.16/bin/psql'
+alias pg_restore96='/usr/local/Cellar/postgresql@9.6/9.6.16/bin/pg_restore'
+alias pg_dump96='/usr/local/Cellar/postgresql@9.6/9.6.16/bin/pg_dump'
 source $HOME/.aliases
 
 # Set name of the theme to load --- if set to "random", it will
@@ -116,7 +119,8 @@ source $ZSH/oh-my-zsh.sh
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-#export PATH="/usr/local/opt/postgresql@9.6/bin:$PATH"
+export PATH="/usr/local/opt/postgresql@9.6/bin:$PATH"
+export PATH="usr/local/Cellar/postgres@9.6/9.6.16/bin:$PATH"
 export NVM_DIR="/Users/joe.chen/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 export PATH="~/.npm:$PATH"
@@ -139,4 +143,12 @@ ecrtt(){
 	container_id=$(docker build --force-rm -t twilio-tester . | grep 'Successfully built' | awk '{print $3}')
 	docker tag $container_id 600375142316.dkr.ecr.us-east-1.amazonaws.com/twilio-tester:$tag
 	docker push 600375142316.dkr.ecr.us-east-1.amazonaws.com/twilio-tester:$tag
+}
+
+
+# gc "some commit message"
+# this will attach the branch name 'AM-1234-stuff' to just add the AM-1234 on the commit message
+function gc() {
+    BRANCH=`git rev-parse --abbrev-ref HEAD | cut -d- -f1,2`
+    git commit -m "$BRANCH $@"
 }
