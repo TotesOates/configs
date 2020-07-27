@@ -9,17 +9,8 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
-
-" The following are examples of different formats supported.
-" Keep Plugin commands between vundle#begin/end.
-" plugin on GitHub repo
 Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
-
-" Python Style Guide
-"Plugin 'nvie/vim-flake8'
-"Autoformatter
-"Plugin 'psf/black'
 " Autocomplete
 Plugin 'valloric/youcompleteme'
 " Color Scheme
@@ -31,19 +22,13 @@ Plugin 'srcery-colors/srcery-vim'
 "GoToDefinition
 Plugin 'ludovicchabant/vim-gutentags'
 "file tree browsing
-"Plugin 'scrooloose/nerdtree'
 Plugin 'preservim/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
-
 "super search
 Plugin 'junegunn/fzf.vim'
 Plugin 'junegunn/fzf'
-
 "Commentary
 Plugin 'tpope/vim-commentary'
-" Git plugin not hosted on GitHub
-"Plugin 'git://git.wincent.com/command-t.git'
-
 "airline
 Plugin 'vim-airline/vim-airline'
 "ALE syntax and fixer
@@ -74,8 +59,8 @@ filetype plugin indent on    " required
 " Put your non-Plugin stuff after this line
 let mapleader = ' '
 " Ale Config
-let g:ale_linters = {'python': ['flake8', 'palantir-python-language-server'], 'cucumber': ['cucumber'], 'javascript': ['prettier', 'eslint']}
-let g:ale_fixers = { '*': ['remove_trailing_lines', 'trim_whitespace'], 'python': ['autopep8', 'remove_trailing_lines', 'trim_whitespace'], 'javascript': ['prettier', 'eslint']}
+let g:ale_linters = {'python': ['flake8', 'palantir-python-language-server'], 'cucumber': ['cucumber'], 'javascript': ['prettier', 'eslint'], 'json': ['jsonlint'], 'dockerfile': ['dockerfile_lint']}
+let g:ale_fixers = { '*': ['remove_trailing_lines', 'trim_whitespace'], 'python': ['autopep8', 'remove_trailing_lines', 'trim_whitespace'], 'javascript': ['prettier', 'eslint'], 'json': ['fixjson']}
 
 let g:ale_sign_error = '✘'
 let g:ale_sign_warning = '⚠'
@@ -93,8 +78,6 @@ call ale#linter#Define('python', {
 			\'command': '%e run',
 			\'project_root': '/usr/local/lib/python3.7/site-packages/pyls',
 			\})
-<
-map <leader>h :ALEGoToDefinition<CR>
 "Rainbow
 let g:rainbow_active = 1
 
@@ -102,6 +85,8 @@ let g:rainbow_active = 1
 noremap <silent><leader>dd :NERDTreeToggle<CR>
 "nerdtree open to current opened file
 noremap <silent> <Leader>df :NERDTreeFind<CR>
+"NerdTree refresh
+noremap <silent> <Leader>dr :NERDTreeRefreshRoot<CR>
 
 let NERDTreeQuitOnOpen = 1
 let NERDTreeShowHidden=1
