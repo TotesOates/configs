@@ -4,10 +4,10 @@ export PATH=/Users/joe.chen/Library/Python/3.8/bin:$PATH
 export PATH=/Users/joe.chen/Library/Python:$PATH
 export PYTHONPATH=~/dev/automate_me/
 export PATH=/Users/joe.chen/Dev/automate_me/lib/python3.8/site-packages:$PATH
+export PATH=/Users/joe.chen/Dev/automate_me/lib/python3.7/site-packages:$PATH
 export PATH=/usr/local/bin:$PATH
 export PATH=/usr/local:$PATH
 export PATH=/usr/local/lib:$PATH
-# Path to your oh-my-zsh installation.
 export ZSH="/Users/joe.chen/.oh-my-zsh"
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
@@ -18,12 +18,13 @@ alias lss='ls -a'
 alias reload='exec $SHELL'
 alias act='source bin/activate'
 alias deact='deactivate'
-alias api='cd nc/api/test_suite/exp_suite'
-alias ui='cd nc/ui/test_suite/exp_suite'
+alias api='cd ~/dev/automate_me/nc/api/test_suite/exp_suite'
+alias ui='cd ~/dev/automate_me/nc/ui/test_suite/exp_suite'
 alias psql96='/usr/local/Cellar/postgresql@9.6/9.6.16/bin/psql'
 alias pg_restore96='/usr/local/Cellar/postgresql@9.6/9.6.16/bin/pg_restore'
 alias pg_dump96='/usr/local/Cellar/postgresql@9.6/9.6.16/bin/pg_dump'
 source $HOME/.aliases
+alias k6new='/usr/local/Cellar/k6/0.27/k6-v0.27.0-mac/k6'
 
 # Set name of the theme to load --- if set to "random", it will
 # load a random theme each time oh-my-zsh is loaded, in which case,
@@ -152,3 +153,5 @@ function gc() {
     BRANCH=`git rev-parse --abbrev-ref HEAD | cut -d- -f1,2`
     git commit -m "$BRANCH $@"
 }
+
+export AWS_SDK_LOAD_CONFIG=1

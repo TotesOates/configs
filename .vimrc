@@ -12,7 +12,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
 " Autocomplete
-Plugin 'valloric/youcompleteme'
+Plugin 'neoclide/coc.nvim'
 " Color Scheme
 Plugin 'jnurmine/Zenburn'
 "Plugin 'lifepillar/vim-solarized8'
@@ -103,13 +103,26 @@ let NERDTreeDirArrows = 1
 " python highlighting
 let python_highlight_all=1
 syntax on
-" YouCompleteMe
-let g:ycm_min_num_of_chars_for_completion = 2
-let g:ycm_max_num_candidates = 15
+"CoC
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+
 "color schemes
 set termguicolors
 set t_Co=256
 let g:gruvbox_contrast_dark = 'hard'
+" let g:gruvbox_italic = 1
+" let g:gruvbox_improved_strings = 1
+
 let g:srcery_italic = 0
 let g:srcery_inverse_matches = 1
 let g:srcery_bold = 1
@@ -136,6 +149,7 @@ set noswapfile
 set nobackup
 set undodir=~/.vim/undodir
 set undofile
+set relativenumber
 "swap file location
 set directory=~/.vim/swapfiles//
 set backupdir=~/.vim/backupdir//
@@ -216,3 +230,4 @@ noremap <leader>l gt<CR>
 
 "groovy indentation
 autocmd Filetype groovy setlocal ts=4 sw=4 expandtab
+autocmd Filetype yaml setlocal ts=2 sw=2 expandtab
