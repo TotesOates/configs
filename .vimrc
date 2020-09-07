@@ -12,7 +12,7 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
 " Autocomplete
-Plugin 'neoclide/coc.nvim'
+" Plugin 'neoclide/coc.nvim'
 " Color Scheme
 Plugin 'jnurmine/Zenburn'
 "Plugin 'lifepillar/vim-solarized8'
@@ -26,7 +26,7 @@ Plugin 'preservim/nerdtree'
 Plugin 'Xuyuanp/nerdtree-git-plugin'
 "super search
 Plugin 'junegunn/fzf.vim'
-Plugin 'junegunn/fzf'
+Plugin 'junegunn/fzf', {'do': { -> fzf#install() }}
 "Commentary
 Plugin 'tpope/vim-commentary'
 "airline
@@ -36,7 +36,8 @@ Plugin 'dense-analysis/ale'
 "Bracket coloring
 Plugin 'frazrepo/vim-rainbow'
 "Auto complete brackets
-Plugin 'jiangmiao/auto-pairs'
+" Plugin 'jiangmiao/auto-pairs'
+Plugin 'tmsvg/pear-tree'
 
 
 " Install L9 and avoid a Naming conflict if you've already installed a
@@ -58,8 +59,12 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 let mapleader = ' '
+" Pear tree options
+let g:pear_tree_smart_openers = 1
+let g:pear_tree_smart_closers = 1
+let g:pear_tree_smart_backspace = 1
 " Ale Config
-let g:ale_linters = {'python': ['flake8', 'palantir-python-language-server'], 'cucumber': ['cucumber'], 'javascript': ['prettier', 'eslint'], 'json': ['jsonlint'], 'dockerfile': ['dockerfile_lint']}
+let g:ale_linters = {'python': ['flake8', 'pyls'], 'cucumber': ['cucumber'], 'javascript': ['prettier', 'eslint'], 'json': ['jsonlint'], 'dockerfile': ['dockerfile_lint']}
 let g:ale_fixers = { '*': ['remove_trailing_lines', 'trim_whitespace'], 'python': ['autopep8', 'remove_trailing_lines', 'trim_whitespace'], 'javascript': ['prettier', 'eslint'], 'json': ['fixjson']}
 
 let g:ale_sign_error = '✘'
@@ -70,19 +75,21 @@ let g:ale_python_flake8_options = '--max-line-length 200 --ignore E501,F403,F405
 let g:ale_python_autopep8_options = '--max-line-length 200 --ignore E501,E252,W605 --aggressive --aggressive --aggressive'
 let g:ale_javascript_prettier_options = '--single-quote --tab-width 2 --trailing-comma es5'
 let g:ale_fix_on_save = 1
-packloadall
-call ale#linter#Define('python', {
-			\ 'name': 'palantir-python-language-server',
-			\'lsp': 'stdio',
-			\'executable': '/usr/local/lib/python3.7/site-packages/pyls/python_ls.py',
-			\'command': '%e run',
-			\'project_root': '/usr/local/lib/python3.7/site-packages/pyls',
-			\})
+let g:ale_completion_enabled = 1
+let g:ale_set_highlights = 1
+let g:ale_set_balloons = 1
+let g:ale_hover_to_preview = 1
+" ale completion select with tab or shift tab
+inoremap <silent><expr> <Tab>
+      \ pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <silent><expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-TAB>"
+noremap <Leader>gd :ALEGoToDefinition<CR>
+noremap <Leader>gr :ALEFindReferences<CR>
 "Rainbow
 let g:rainbow_active = 1
 
 "Nerd tree toggle open
-noremap <silent><leader>dd :NERDTreeToggle<CR>
+noremap <silent><Leader>dd :NERDTreeToggle<CR>
 "nerdtree open to current opened file
 noremap <silent> <Leader>df :NERDTreeFind<CR>
 "NerdTree refresh
@@ -103,18 +110,6 @@ let NERDTreeDirArrows = 1
 " python highlighting
 let python_highlight_all=1
 syntax on
-"CoC
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
 
 "color schemes
 set termguicolors
@@ -165,11 +160,18 @@ let $FZF_DEFAULT_COMMAND='rg --files --smart-case'
 nnoremap <leader>f :Files<Cr>
 command! -bang -nargs=? -complete=dir Files
     \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
-command! -bang -nargs=* Rg
-  \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always --smart-case '.shellescape(<q-args>), 1,
-  \   fzf#vim#with_preview(), <bang>0)
-let g:fzf_layout = {'down': '100%', 'window': '-tabnew'}
+" this layout will turn the search and preview into a full screen tab
+let g:fzf_preview_window='right:40%'
+
+function! RipgrepFzf(query, fullscreen)
+  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
+  let initial_command = printf(command_fmt, shellescape(a:query))
+  let reload_command = printf(command_fmt, '{q}')
+  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+endfunction
+
+command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 "maps leader w to open up ripgrep text search
 nmap <leader>w :Rg<Cr>
 "search for things everything that isn't node_modules or in gitignore
@@ -227,6 +229,10 @@ noremap <leader>9 9gt<CR>
 noremap <leader>0 0gt<CR>
 noremap <leader>h gT<CR>
 noremap <leader>l gt<CR>
+"Gitgutter
+nmap ghs <Plug>(GitGutterStageHunk)
+nmap ghu <Plug>(GitGutterUndoHunk)
+nmap ghp <Plug>(GitGutterPreviewHunk)
 
 "groovy indentation
 autocmd Filetype groovy setlocal ts=4 sw=4 expandtab
