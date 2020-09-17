@@ -13,3 +13,4 @@ pip3 install python-language-server
 npm install -g typescript 
 npm install -g fixjson
 npm install jsonlint -g
+npm install -g dockerfile_lint
