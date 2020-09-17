@@ -11,3 +11,5 @@ pip3 install flake8
 brew install --HEAD universal-ctags/universal-ctags/universal-ctags
 pip3 install python-language-server
 npm install -g typescript 
+npm install -g fixjson
+npm install jsonlint -g
