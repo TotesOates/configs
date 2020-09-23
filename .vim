@@ -14,3 +14,4 @@ npm install -g typescript
 npm install -g fixjson
 npm install jsonlint -g
 npm install -g dockerfile_lint
+https://github.com/romkatv/powerlevel10k
