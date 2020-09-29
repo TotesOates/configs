@@ -12,13 +12,13 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
 " Autocomplete
-" Plugin 'neoclide/coc.nvim'
+Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 " Color Scheme
-Plugin 'jnurmine/Zenburn'
+" Plugin 'jnurmine/Zenburn'
 "Plugin 'lifepillar/vim-solarized8'
 Plugin 'morhetz/gruvbox'
 Plugin 'vim-airline/vim-airline-themes'
-Plugin 'srcery-colors/srcery-vim'
+" Plugin 'srcery-colors/srcery-vim'
 "GoToDefinition
 Plugin 'ludovicchabant/vim-gutentags'
 "file tree browsing
@@ -63,8 +63,10 @@ let mapleader = ' '
 let g:pear_tree_smart_openers = 1
 let g:pear_tree_smart_closers = 1
 let g:pear_tree_smart_backspace = 1
+"ALE-COC configs
+let g:ale_disable_lsp = 1
 " Ale Config
-let g:ale_linters = {'python': ['flake8', 'pyls'], 'cucumber': ['cucumber'], 'javascript': ['prettier', 'eslint'], 'json': ['jsonlint'], 'dockerfile': ['dockerfile_lint']}
+let g:ale_linters = {'python': ['flake8', 'pyls'], 'cucumber': ['cucumber'], 'javascript': ['prettier', 'eslint', 'tsserver'], 'json': ['jsonlint'], 'dockerfile': ['dockerfile_lint']}
 let g:ale_fixers = { '*': ['remove_trailing_lines', 'trim_whitespace'], 'python': ['autopep8', 'remove_trailing_lines', 'trim_whitespace'], 'javascript': ['prettier', 'eslint'], 'json': ['fixjson']}
 
 let g:ale_sign_error = '✘'
@@ -80,11 +82,26 @@ let g:ale_set_highlights = 1
 let g:ale_set_balloons = 1
 let g:ale_hover_to_preview = 1
 " ale completion select with tab or shift tab
-inoremap <silent><expr> <Tab>
-      \ pumvisible() ? "\<C-n>" : "\<TAB>"
-inoremap <silent><expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-TAB>"
+" inoremap <silent><expr> <Tab>
+"       \ pumvisible() ? "\<C-n>" : "\<TAB>"
+" inoremap <silent><expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-TAB>"
 noremap <Leader>gd :ALEGoToDefinition<CR>
 noremap <Leader>gr :ALEFindReferences<CR>
+
+"COC config
+set updatetime=150
+set shortmess+=c
+set hidden
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
 "Rainbow
 let g:rainbow_active = 1
 
@@ -117,22 +134,8 @@ set t_Co=256
 let g:gruvbox_contrast_dark = 'hard'
 " let g:gruvbox_italic = 1
 " let g:gruvbox_improved_strings = 1
-
-let g:srcery_italic = 0
-let g:srcery_inverse_matches = 1
-let g:srcery_bold = 1
-let g:srcery_inverse = 1
-
-if has('gui_running')
-  colorscheme solarized
-else
-  " colorscheme zenburn
- "colorscheme srcery
- " colorscheme solarized8_low
-  colorscheme gruvbox
-  set background=dark
-endif
-autocmd FileType cucumber setlocal ts=2 sts=2 sw=2 expandtab
+colorscheme gruvbox
+set background=dark
 "Standard VIM settings
 "search highlight
 "This unsets the "last search pattern" register by hitting return
@@ -149,22 +152,26 @@ set relativenumber
 set directory=~/.vim/swapfiles//
 set backupdir=~/.vim/backupdir//
 set undodir=~/.vim/undo//
+" use mouse scroll
+set mouse=r
+set ttymouse=xterm2
+" on enter to get rid of highlight
 nnoremap <CR> :noh<CR><CR>
 "line numbering
 set nu
 "utf-8
-set encoding=utf-8
-"maps to control + p to open up :FZF fuzzy search
+set encoding=UTF-8
 set rtp+=/usr/local/bin/fzf
 let $FZF_DEFAULT_COMMAND='rg --files --smart-case'
 nnoremap <leader>f :Files<Cr>
-command! -bang -nargs=? -complete=dir Files
-    \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
+" command! -bang -nargs=? -complete=dir Files
+    " \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
 " this layout will turn the search and preview into a full screen tab
 let g:fzf_preview_window='right:40%'
+let g:fzf_layout = { 'down': '25%' }
 
 function! RipgrepFzf(query, fullscreen)
-  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
+  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -i -U -- %s || true'
   let initial_command = printf(command_fmt, shellescape(a:query))
   let reload_command = printf(command_fmt, '{q}')
   let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
@@ -185,8 +192,6 @@ let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#formatter = 'unique_tail'
 let g:airline_theme='ouo'
-" use mouse scroll
-set mouse=a
 "copy paste
 vmap <C-c> "+yi
 vmap <C-x> "+c
@@ -202,10 +207,6 @@ vnoremap <C-k> :m '<-2<CR>gv=gv
 "gutentags directory
 let g:gutentags_cache_dir='~/.vim/tags'
 "let g:gutentags_trace = 1
-"guard xtermmouse
-if !has('nvim')
-    set ttymouse=xterm2
-endif
 "Switch between terminal and vim, ctrl+d to enter terminal and ctrl+d to
 "return to vim
 noremap <C-d> :sh<CR>
@@ -237,3 +238,6 @@ nmap ghp <Plug>(GitGutterPreviewHunk)
 "groovy indentation
 autocmd Filetype groovy setlocal ts=4 sw=4 expandtab
 autocmd Filetype yaml setlocal ts=2 sw=2 expandtab
+autocmd Filetype javascript setlocal ts=2 sw=2 expandtab
+autocmd Filetype sh setlocal ts=2 sw=2 expandtab
+autocmd FileType cucumber setlocal ts=2 sts=2 sw=2 expandtab
