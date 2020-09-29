@@ -1,3 +1,5 @@
+brew install pgcli
+
 need to create a .vim directory for vundle to bundle stuff into
 Also in the .vim directory, you'll need to create a `undo`, `undodir`, `backupdir`, and `tags` directories. This is because we turned off swap files but still want to keep history of our undos and backups. Tags dir is for ctags and guten-tags to work
 **Dependencies for vim** AKA stuff that needs to be installed to work
