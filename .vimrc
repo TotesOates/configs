@@ -7,7 +7,6 @@ call vundle#begin()
 " alternatively, pass a path where Vundle should install plugins
 "call vundle#begin('~/some/path/here')
 
-" let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'tpope/vim-fugitive'
 Plugin 'airblade/vim-gitgutter'
@@ -19,7 +18,7 @@ Plugin 'neoclide/coc.nvim', {'branch': 'release'}
 Plugin 'morhetz/gruvbox'
 Plugin 'vim-airline/vim-airline-themes'
 " Plugin 'srcery-colors/srcery-vim'
-"GoToDefinition
+"tags
 Plugin 'ludovicchabant/vim-gutentags'
 "file tree browsing
 Plugin 'preservim/nerdtree'
@@ -36,13 +35,7 @@ Plugin 'dense-analysis/ale'
 "Bracket coloring
 Plugin 'frazrepo/vim-rainbow'
 "Auto complete brackets
-" Plugin 'jiangmiao/auto-pairs'
 Plugin 'tmsvg/pear-tree'
-
-
-" Install L9 and avoid a Naming conflict if you've already installed a
-" different version somewhere else.
-" Plugin 'ascenator/L9', {'name': 'newL9'}
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -64,7 +57,7 @@ let g:pear_tree_smart_openers = 1
 let g:pear_tree_smart_closers = 1
 let g:pear_tree_smart_backspace = 1
 "ALE-COC configs
-let g:ale_disable_lsp = 1
+" let g:ale_disable_lsp = 1
 " Ale Config
 let g:ale_linters = {'python': ['flake8', 'pyls'], 'cucumber': ['cucumber'], 'javascript': ['prettier', 'eslint', 'tsserver'], 'json': ['jsonlint'], 'dockerfile': ['dockerfile_lint']}
 let g:ale_fixers = { '*': ['remove_trailing_lines', 'trim_whitespace'], 'python': ['autopep8', 'remove_trailing_lines', 'trim_whitespace'], 'javascript': ['prettier', 'eslint'], 'json': ['fixjson']}
@@ -82,26 +75,36 @@ let g:ale_set_highlights = 1
 let g:ale_set_balloons = 1
 let g:ale_hover_to_preview = 1
 " ale completion select with tab or shift tab
-" inoremap <silent><expr> <Tab>
-"       \ pumvisible() ? "\<C-n>" : "\<TAB>"
-" inoremap <silent><expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-TAB>"
+inoremap <silent><expr> <Tab>
+      \ pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <silent><expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-TAB>"
 noremap <Leader>gd :ALEGoToDefinition<CR>
 noremap <Leader>gr :ALEFindReferences<CR>
 
-"COC config
-set updatetime=150
-set shortmess+=c
-set hidden
-inoremap <silent><expr> <TAB>
-      \ pumvisible() ? "\<C-n>" :
-      \ <SID>check_back_space() ? "\<TAB>" :
-      \ coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
+" inoremap <silent><expr> <TAB>
+"       \ pumvisible() ? "\<C-n>" :
+"       \ <SID>check_back_space() ? "\<TAB>" :
+"       \ coc#refresh()
+" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+" function! s:check_back_space() abort
+"   let col = col('.') - 1
+"   return !col || getline('.')[col - 1]  =~# '\s'
+" endfunction
+
+" function! s:GoToDefinition()
+"   if CocAction('jumpDefinition')
+"     return v:true
+"   endif
+
+"   let ret = execute("silent! normal \<C-]>")
+"   if ret =~ "Error" || ret =~ "错误"
+"     call searchdecl(expand('<cword>'))
+"   endif
+" endfunction
+
+" nmap <leader> gd :call <SID>GoToDefinition()<CR>
 "Rainbow
 let g:rainbow_active = 1
 
@@ -117,58 +120,71 @@ let NERDTreeShowHidden=1
 let NERDTreeMinimalUI = 1
 let NERDTreeDirArrows = 1
 
-"nerd tree open by default
-"autocmd StdinReadPre * let s:std_in=1
-"autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | exe 'cd '.argv()[0] | endif
-"autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-"autocmd StdinReadPre * let s:std_in=1
-"autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
-"
 " python highlighting
 let python_highlight_all=1
-syntax on
 
 "color schemes
-set termguicolors
-set t_Co=256
 let g:gruvbox_contrast_dark = 'hard'
 " let g:gruvbox_italic = 1
 " let g:gruvbox_improved_strings = 1
 colorscheme gruvbox
-set background=dark
 "Standard VIM settings
-"search highlight
-"This unsets the "last search pattern" register by hitting return
-set ic
-set hls is
+" syntax on
+syntax enable
+set termguicolors
+set t_Co=256 		"Support 256 colors
+set background=dark
+set ic 			"search highlight
+set hls is 		"This unsets the "last search pattern" register by hitting return
 set noerrorbells
 set smartindent
 set noswapfile
 set nobackup
+set nowritebackup
 set undodir=~/.vim/undodir
 set undofile
-set relativenumber
-"swap file location
+set relativenumber 	"line number count relative to where cursor is
+set spell
+set spelllang=en_us
+set cursorline 		"Different color on the line where cursor is at
 set directory=~/.vim/swapfiles//
 set backupdir=~/.vim/backupdir//
 set undodir=~/.vim/undo//
-" use mouse scroll
-set mouse=r
-set ttymouse=xterm2
+set mouse=r  		"use mouse scroll
+set nu 			"line numbering
+set encoding=UTF-8 	"utf-8"
+set updatetime=150 	"faster completion
+set shortmess+=c
+set hidden		"prevent multiple buffers from opening more buffers
+"new setting
+set smarttab		"make tab realize tab counts
+set expandtab		"coverts tabs top spaces
+set smartindent
+set autoindent
+set pumheight=10
+set cmdheight=2
+set iskeyword+=-
+set showtabline=2 	"Always show tab bar
+set timeoutlen=500	"default timeoutlen is 1000ms
+set formatoptions-=cro 	"stop newline continuatino of comments
+set clipboard=unnamedplus "Copy past between vim and everything else
+set ruler
+if !has('nvim')
+  set ttymouse=xterm2
+endif
 " on enter to get rid of highlight
 nnoremap <CR> :noh<CR><CR>
-"line numbering
-set nu
-"utf-8
-set encoding=UTF-8
 set rtp+=/usr/local/bin/fzf
 let $FZF_DEFAULT_COMMAND='rg --files --smart-case'
 nnoremap <leader>f :Files<Cr>
-" command! -bang -nargs=? -complete=dir Files
-    " \ call fzf#vim#files(<q-args>, fzf#vim#with_preview({'options': ['--layout=reverse', '--info=inline']}), <bang>0)
-" this layout will turn the search and preview into a full screen tab
-let g:fzf_preview_window='right:40%'
-let g:fzf_layout = { 'down': '25%' }
+if !has('nvim')
+  let g:fzf_preview_window='right:40%'
+  let g:fzf_layout = { 'down': '50%' }
+endif
+if has('nvim')
+  let g:fzf_layout = { 'right': '50%' }
+  let g:fzf_preview_window='down:40%'
+endif
 
 function! RipgrepFzf(query, fullscreen)
   let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -i -U -- %s || true'
@@ -210,7 +226,12 @@ let g:gutentags_cache_dir='~/.vim/tags'
 "Switch between terminal and vim, ctrl+d to enter terminal and ctrl+d to
 "return to vim
 noremap <C-d> :sh<CR>
-tnoremap <ESC> <C-w>:q!<CR>
+if !has('nvim')
+  tnoremap <ESC> <C-w>:q!<CR>
+endif
+if has('nvim')
+  tnoremap <ESC> <C-\><C-n>:q!<CR>
+endif
 "git fugitive
 set diffopt+=vertical
 noremap <leader>gs :Git<CR>
