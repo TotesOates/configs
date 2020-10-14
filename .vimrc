@@ -35,7 +35,10 @@ Plugin 'dense-analysis/ale'
 "Bracket coloring
 Plugin 'frazrepo/vim-rainbow'
 "Auto complete brackets
-Plugin 'tmsvg/pear-tree'
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'machakann/vim-sandwich'
+"Auto indent for all file
+" Plugin 'tpope/vim-sleuth'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -52,10 +55,6 @@ filetype plugin indent on    " required
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 let mapleader = ' '
-" Pear tree options
-let g:pear_tree_smart_openers = 1
-let g:pear_tree_smart_closers = 1
-let g:pear_tree_smart_backspace = 1
 "ALE-COC configs
 " let g:ale_disable_lsp = 1
 " Ale Config
@@ -144,8 +143,8 @@ set nowritebackup
 set undodir=~/.vim/undodir
 set undofile
 set relativenumber 	"line number count relative to where cursor is
-set spell
-set spelllang=en_us
+" set spell
+" set spelllang=en_us
 set cursorline 		"Different color on the line where cursor is at
 set directory=~/.vim/swapfiles//
 set backupdir=~/.vim/backupdir//
@@ -157,6 +156,8 @@ set updatetime=150 	"faster completion
 set shortmess+=c
 set hidden		"prevent multiple buffers from opening more buffers
 "new setting
+set spell
+set spelllang=en_us
 set smarttab		"make tab realize tab counts
 set expandtab		"coverts tabs top spaces
 set smartindent
@@ -262,3 +263,8 @@ autocmd Filetype yaml setlocal ts=2 sw=2 expandtab
 autocmd Filetype javascript setlocal ts=2 sw=2 expandtab
 autocmd Filetype sh setlocal ts=2 sw=2 expandtab
 autocmd FileType cucumber setlocal ts=2 sts=2 sw=2 expandtab
+
+" Commands for vim-sandwhich
+" sdb = deletes the pairs of [], {}, "" depend on where your cursor highlights
+" sd{', [, }, etc]} = does the same thing as sdb but you must specify the char
+" sa{motion}{character} = will add backets between your motion

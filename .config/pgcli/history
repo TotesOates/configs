@@ -1,0 +1,712 @@
+
+# 2020-02-05 09:27:09.328386
++\l
+
+# 2020-02-05 09:27:30.255957
++select * from user_profile_user limit 1
+
+# 2020-02-05 09:27:36.952077
++exit
+
+# 2020-02-05 09:45:18.752803
++select * from user_profile_user limit 1
+
+# 2020-02-05 09:45:28.694173
++exit
+
+# 2020-02-05 12:06:18.535770
++\l
+
+# 2020-02-05 12:06:22.749054
++select * from user_profile_user limit 1
+
+# 2020-02-05 12:06:51.651606
++\dt
+
+# 2020-02-05 12:07:09.882294
++select * from zip_codes
+
+# 2020-02-05 12:07:29.442833
++\dE
+
+# 2020-02-05 12:07:33.335565
++\di
+
+# 2020-02-05 12:07:41.983348
++\du
+
+# 2020-02-05 12:08:00.866952
++exit
+
+# 2020-02-05 13:08:52.961252
++select * from zip_codes
+
+# 2020-02-05 13:09:47.736126
++exit
+
+# 2020-02-05 13:44:58.485671
++\l
+
+# 2020-02-05 13:45:16.432759
++\dt
+
+# 2020-02-05 13:45:54.245122
++select * from zip_codes
+
+# 2020-02-05 13:46:05.059140
++select * from user_profile_user limit 1
+
+# 2020-02-05 13:46:32.963429
++exit
+
+# 2020-02-05 13:59:26.771404
++select * from user_profile_user limit 1
+
+# 2020-02-05 13:59:59.549617
++exit
+
+# 2020-02-05 14:08:20.422171
++\l
+
+# 2020-02-05 14:08:27.180550
++select * from user_profile_user limit 1
+
+# 2020-02-05 14:09:18.768786
++exit
+
+# 2020-02-05 14:10:15.066850
++select * from user_profile_user limit 1
+
+# 2020-02-05 14:10:31.015013
++\dt
+
+# 2020-02-05 14:25:03.398815
++exit
+
+# 2020-02-05 14:47:21.441993
++select * from user_profile_user limit 1
+
+# 2020-02-05 14:47:26.651224
++exit
+
+# 2020-02-05 14:58:04.726274
++select * from user_profile_user limit 1
+
+# 2020-02-05 14:58:42.672852
++select count(*) from user_profile_user
+
+# 2020-02-05 14:58:48.878809
++\dt
+
+# 2020-02-05 14:59:11.657201
++select count(*) from customer_customer
+
+# 2020-02-05 14:59:35.355323
++select * from customer_customer limit 20
+
+# 2020-02-05 15:00:27.915205
++select count(*) from customer_customer
+
+# 2020-02-05 15:00:36.500156
++select * from user_profile_user limit 1
+
+# 2020-02-05 15:00:54.011314
++\list
+
+# 2020-02-05 15:01:02.850559
++\dt
+
+# 2020-02-05 15:01:23.255597
++select * from zip_codes limit 1
+
+# 2020-02-05 15:01:28.992525
++select * from zip_codes limit 0
+
+# 2020-02-05 15:01:32.788094
++select * from zip_codes \
+
+# 2020-02-05 15:01:34.559417
++select * from zip_codes
+
+# 2020-02-05 15:04:31.026131
++select * from user_profile_user limit 1
+
+# 2020-02-05 15:04:50.562353
++select * from user_profile_user where name='joe'
+
+# 2020-02-05 15:04:56.326236
++select * from user_profile_user where name = 'joe'
+
+# 2020-02-05 15:05:11.202380
++select * from user_profile_user where first_name = 'joe'
+
+# 2020-02-05 15:05:45.811160
++select * from user_profile_user where email = 'joe.chen@alertmedia.com'
+
+# 2020-02-05 15:41:13.767159
++exit
+
+# 2020-02-05 15:43:07.733489
++select * from user_profile_user where email = 'joe.chen@alertmedia.com'
+
+# 2020-02-05 17:00:00.057563
++exit
+
+# 2020-02-06 11:28:49.462676
++\l
+
+# 2020-02-06 11:28:52.541197
++exit
+
+# 2020-02-09 22:37:59.331488
++\l
+
+# 2020-02-09 22:38:26.201118
++SELECT * FROM notify_notification WHERE id = '31e99e02-e856-4cfb-b272-cf5951cbb402'
+
+# 2020-02-09 22:38:42.880134
++close
+
+# 2020-02-09 22:38:44.092018
++quit
+
+# 2020-02-10 12:20:03.741203
++select * from notify_notification where id = '02812523-2067-4dad-8d09-3f02369141cc'
+
+# 2020-08-05 11:37:55.360013
++SELECT * FROM user_profile_user WHERE id = '4416971'
+
+# 2020-08-05 11:38:53.117851
++\dt
+
+# 2020-08-05 11:39:10.403744
++\x
+
+# 2020-08-05 11:39:31.185180
++SELECT * FROM user_profile_user WHERE id = '4416971'
+
+# 2020-08-05 11:40:13.813627
++SELECT * FROM device_device WHERE user_id = '
+
+# 2020-08-05 11:40:20.806351
++SELECT * FROM device_device WHERE user_id = '4416971'
+
+# 2020-08-05 11:43:35.675105
++exit
+
+# 2020-09-29 12:41:35.325048
++\x
+
+# 2020-09-29 12:41:48.315858
++\dt
+
+# 2020-09-29 12:43:03.324795
++SELECT * FROM notify_notification WHERE id = "3ec63b05-94e9-4590-bb19-e1edb095fc06"
+
+# 2020-09-29 12:43:07.624479
++SELECT * FROM notify_notification WHERE id = "3ec63b05-94e9-4590-bb19-e1edb095fc06";
+
+# 2020-09-29 12:43:20.753058
++SELECT * FROM notify_notification WHERE id = 3ec63b05-94e9-4590-bb19-e1edb095fc06;
+
+# 2020-09-29 12:43:38.013203
++SELECT * FROM notify_notification WHERE id="3ec63b05-94e9-4590-bb19-e1edb095fc06";
+
+# 2020-09-29 12:44:22.682042
++SELECT * FROM notify_notification WHERE 
+
+# 2020-09-29 12:44:38.840629
++\dt
+
+# 2020-09-29 12:45:50.798436
++SELECT * FROM information_schema ORDER BY RANDOM() LIMIT 1;
+
+# 2020-09-29 12:46:05.646875
++SELECT * FROM notify_notification ORDER BY RANDOM() LIMIT 1;
+
+# 2020-09-29 12:46:38.341502
++\x
+
+# 2020-09-29 12:46:40.145664
++SELECT * FROM notify_notification ORDER BY RANDOM() LIMIT 1;
+
+# 2020-09-29 12:46:43.585745
++\x
+
+# 2020-09-29 12:46:59.428733
++SELECT * FROM notify_notification WHERE id="3ec63b05-94e9-4590-bb19-e1edb095fc06";
+
+# 2020-09-29 12:47:06.328039
++SELECT * FROM notify_notification ORDER BY RANDOM() LIMIT 1;
+
+# 2020-09-29 12:47:37.288313
++SELECT * FROM notify_notification WHERE id="3ec63b05-94e9-4590-bb19-e1edb095fc06";
+
+# 2020-09-29 12:47:46.512423
++SELECT * FROM notify_notification WHERE id = "3ec63b05-94e9-4590-bb19-e1edb095fc06";
+
+# 2020-09-29 12:47:48.989110
++SELECT * FROM notify_notification ORDER BY RANDOM() LIMIT 1;
+
+# 2020-09-29 12:48:00.880919
++SELECT * FROM notify_notification WHERE id = "117bdfa0-d5a8-482d-aed4-b59e57185e3f";
+
+# 2020-09-29 12:48:14.246022
++SELECT * FROM notify_notification WHERE id = '117bdfa0-d5a8-482d-aed4-b59e57185e3f';
+
+# 2020-09-29 12:48:27.415472
++SELECT * FROM notify_notification WHERE id = '3ec63b05-94e9-4590-bb19-e1edb095fc06';
+
+# 2020-09-29 12:49:02.220478
++\dt
+
+# 2020-09-29 12:49:28.488666
++SELECT * FROM notify_notificationmessage ORDER BY RANDOM() LIMIT 1;
+
+# 2020-09-29 12:49:51.405086
++SELECT * FROM notify_notificationmessage WHERE notification_id = '3ec63b05-94e9-4590-bb19-e1edb095fc06';
+
+# 2020-09-29 12:51:01.323136
++SELECT * FROM notify_notificationmessage WHERE notification_id = '93339bd4-7b7f-461a-af03-5d4059f060ca';
+
+# 2020-09-29 12:53:37.509191
++SELECT * FROM notify_notificationmessage WHERE notification_id = '7203323a-d2de-4fb3-9a8a-31f834f20442';
+
+# 2020-09-30 18:45:10.953919
++\x
+
+# 2020-09-30 18:45:25.274871
++select isscheduleactive(
++    start_date    := ,
++    end_date      := ,
++    shift_id      := ,
++    period        := ,
++    start_day_idx := ,
++    monday_hrs    := ,
++    tuesday_hrs   := ,
++    wednesday_hrs := ,
++    thursday_hrs  := ,
++    friday_hrs    := ,
++    saturday_hrs  := ,
++    sunday_hrs    := ,
++    schedule_id   := ,
++    p_target      := ,
++    p_tim
+
+# 2020-09-30 18:45:56.115788
++select * from notify_notification where id = 'a6ec8388-667c-4c0d-8482-725f6950a02d'
+
+# 2020-09-30 18:46:31.702445
++\dt
+
+# 2020-09-30 18:47:23.226811
++select * from user_profile_user_user_permissions 
+
+# 2020-09-30 18:47:29.992303
++SELECT * FROM notify_notificationmessage ORDER BY RANDOM() LIMIT 1;
+
+# 2020-09-30 18:47:39.011072
++select * from user_profile_user_user_permissions ORDER BY random() LIMIT 1;
+
+# 2020-09-30 18:47:45.580165
++select * from user_profile_user_user_permissions ORDER BY RANDOM() LIMIT 1;
+
+# 2020-09-30 18:47:55.146514
++select * from user_profile_user_permissions ORDER BY RANDOM() LIMIT 1;
+
+# 2020-09-30 18:48:03.745520
++\dt
+
+# 2020-09-30 18:48:46.304040
++select * from user_profile_user_user_permissions ORDER BY RANDOM() LIMIT 1;
+
+# 2020-09-30 18:48:50.134601
++user_profile_user_user_permissions
+
+# 2020-09-30 18:48:58.012930
++SELECT * FROM user_profile_user_user_permissions ORDER BY RANDOM() LIMIT 1;
+
+# 2020-09-30 18:49:10.731454
++\dt
+
+# 2020-09-30 18:49:37.661639
++SELECT * FROM user_profile_user ORDER BY RANDOM() LIMIT 1;
+
+# 2020-09-30 18:50:04.980133
++SELECT * FROM user_profile_user WHERE id = '4665931';
+
+# 2020-09-30 20:52:17.871405
++
++
+
+# 2020-09-30 20:52:19.337722
++/dt
+
+# 2020-09-30 20:52:22.846527
++\dt
+
+# 2020-09-30 20:53:51.369707
++select * from notify_notification where id = 'eea0c31d-63ef-4d39-9da1-de3b8d5639da'
+
+# 2020-10-01 14:33:45.984721
++exit
+
+# 2020-10-02 13:44:47.674126
++select awsdms_intercept_ddl()
+
+# 2020-10-02 13:45:23.820118
++select * from notify_notification where id = '4490527'
+
+# 2020-10-02 13:45:27.452674
++\x
+
+# 2020-10-02 13:45:29.171424
++\dt
+
+# 2020-10-02 13:45:45.171999
++select * from user_profile_user where id = '4490527';
+
+# 2020-10-02 13:45:54.180310
++\dt
+
+# 2020-10-02 13:46:23.223541
++select * from customer_customeradmin ORDER BY RANDOM() LIMIT 1;
+
+# 2020-10-02 13:46:45.444261
++select * from customer_customeradmin where user_id = '4490527';
+
+# 2020-10-02 14:07:32.044183
++\dt
+
+# 2020-10-02 14:07:54.931418
++select * from customer_customeradmin_allowed_groups ORDER BY RANDOM() LIMIT 1;
+
+# 2020-10-02 14:08:51.336818
++select * from customer_customeradmin where user_id = '4490527' JOIN on customer_customeradmin_allowed_groups WHERE user_id = customeradmin_id;
+
+# 2020-10-02 14:09:30.931413
++select * from customer_customeradmin where user_id = '4490527' INNER JOIN on customer_customeradmin_allowed_groups WHERE user_id = customeradmin_id;
+
+# 2020-10-02 14:10:31.349048
++select * from customer_customeradmin INNER JOIN customer_customeradmin_allowed_groups ON user_id = customeradmin_id WHERE user_id = '4490527';
+
+# 2020-10-02 14:11:09.319775
++select * from customer_customeradmin_allowed_groups WHERE customeradmin_id = '4490527';
+
+# 2020-10-02 14:11:16.078641
++select * from customer_customeradmin_allowed_groups WHERE customeradmin_id = "4490527";
+
+# 2020-10-02 14:12:22.049865
++select * from customer_customeradmin INNER JOIN customer_customeradmin_allowed_groups ON user_id = customeradmin_id WHERE user_id = '4490527';
+
+# 2020-10-02 14:13:08.870024
++select * from customer_customeradmin_allowed_groups WHERE group_id = '175401';
+
+# 2020-10-02 14:15:32.994769
++select * from customer_customeradmin INNER JOIN customer_customer ON customer_customer.id = customer_customeradmin.customer_id
+
+# 2020-10-02 14:16:35.758605
++select * from customer_customeradmin INNER JOIN customer_customeradmin_allowed_groups ON customer_customeradmin.user_id = customer_customeradmin_allowed_groups.customeradmin_id WHERE user_id = '4490527';
+
+# 2020-10-02 14:17:25.641971
++select * from customer_customeradmin where user_id = '58668';
+
+# 2020-10-02 14:17:34.613138
++select * from customer_customeradmin where * = '58668';
+
+# 2020-10-02 14:17:38.584330
++select * from customer_customeradmin where id = '58668';
+
+# 2020-10-02 14:17:57.959325
++select * from customer_customeradmin INNER JOIN customer_customeradmin_allowed_groups ON customer_customeradmin.user_id = customer_customeradmin_allowed_groups.customeradmin_id WHERE id = '4490527';
+
+# 2020-10-02 14:18:07.255902
++select * from customer_customeradmin INNER JOIN customer_customeradmin_allowed_groups ON customer_customeradmin.user_id = customer_customeradmin_allowed_groups.customeradmin_id WHERE customer_customeradmin.id = '4490527';
+
+# 2020-10-02 14:18:42.859976
++select * from customer_customeradmin INNER JOIN customer_customeradmin_allowed_groups ON customer_customeradmin.id = customer_customeradmin_allowed_groups.customeradmin_id WHERE user_id = '4490527';
+
+# 2020-10-02 15:53:48.518270
++exit
+
+# 2020-10-05 11:28:09.320759
++\x
+
+# 2020-10-05 11:28:10.649585
++\dt
+
+# 2020-10-05 11:28:35.711566
++select * from user_profile_user order by random() limit 1;
+
+# 2020-10-05 11:30:55.298170
++\dt
+
+# 2020-10-05 11:31:45.127661
++select * from customer_customeradmin order by random() limit 1;
+
+# 2020-10-05 11:33:00.380726
++select * from user_profile_user inner join customer_customeradmin on user_profile_user.customer_id = customer_customeradmin.customer_id limit 5;
+
+# 2020-10-05 11:33:47.597368
++select * from user_profile_user inner join customer_customeradmin on user_profile_user.customer_id = customer_customeradmin.customer_id where user_profile_user.customer_id = '600' limit 2;
+
+# 2020-10-05 11:36:18.025300
++select * from user_profile_user inner join customer_customeradmin on user_profile_user.customer_id = customer_customeradmin.customer_id where user_profile_user.customer_id = '600' and user_profile_user.deleted_date = null limit 2;
+
+# 2020-10-05 11:36:53.576483
++select * from user_profile_user inner join customer_customeradmin on user_profile_user.customer_id = customer_customeradmin.customer_id where user_profile_user.customer_id = '600' and user_profile_user.deleted_date is null limit 2;
+
+# 2020-10-05 11:39:10.988659
++select id, email from user_profile_user inner join customer_customeradmin on user_profile_user.customer_id = customer_customeradmin.customer_id where user_profile_user.customer_id = '600' and user_profile_user.deleted_date is null limit 2;
+
+# 2020-10-05 11:39:20.746046
++select id email from user_profile_user inner join customer_customeradmin on user_profile_user.customer_id = customer_customeradmin.customer_id where user_profile_user.customer_id = '600' and user_profile_user.deleted_date is null limit 2;
+
+# 2020-10-05 11:39:24.874885
++select id, email from user_profile_user inner join customer_customeradmin on user_profile_user.customer_id = customer_customeradmin.customer_id where user_profile_user.customer_id = '600' and user_profile_user.deleted_date is null limit 2;
+
+# 2020-10-05 11:41:13.109268
++with t as (select id, email from user_profile_user inner join customer_customeradmin on user_profile_user.customer_id = customer_customeradmin.customer_id where user_profile_user.customer_id = '600' and user_profile_user.deleted_date is null limit 2);
+
+# 2020-10-05 11:41:25.129736
++with t as (select id, email from user_profile_user inner join customer_customeradmin on user_profile_user.customer_id = customer_customeradmin.customer_id where user_profile_user.customer_id = '600' and user_profile_user.deleted_date is null limit 2) select json_agg(t) from t;
+
+# 2020-10-05 11:41:36.539622
++with t as (select email from user_profile_user inner join customer_customeradmin on user_profile_user.customer_id = customer_customeradmin.customer_id where user_profile_user.customer_id = '600' and user_profile_user.deleted_date is null limit 2) select json_agg(t) from t;
+
+# 2020-10-05 11:41:49.591101
++with t as (select email, pk from user_profile_user inner join customer_customeradmin on user_profile_user.customer_id = customer_customeradmin.customer_id where user_profile_user.customer_id = '600' and user_profile_user.deleted_date is null limit 2) select json_agg(t) from t;
+
+# 2020-10-05 11:42:05.123473
++with t as (select user_profile_user.id, email from user_profile_user inner join customer_customeradmin on user_profile_user.customer_id = customer_customeradmin.customer_id where user_profile_user.customer_id = '600' and user_profile_user.deleted_date is null limit 2) select json_agg(t) from t;
+
+# 2020-10-05 11:42:31.487413
++with t as (select user_profile_user.id, email from user_profile_user inner join customer_customeradmin on user_profile_user.customer_id = customer_customeradmin.customer_id where user_profile_user.customer_id = '600' and user_profile_user.deleted_date is null limit 1000) select json_agg(t) from t;
+
+# 2020-10-05 11:44:13.654949
++with t as (select distinct user_profile_user.id, email from user_profile_user inner join customer_customeradmin on user_profile_user.customer_id = customer_customeradmin.customer_id where user_profile_user.customer_id = '600' and user_profile_user.deleted_date is null limit 1000) select json_agg(t) from t;
+
+# 2020-10-05 11:46:03.482320
++select * from customer_customeradmin order by random() limit 1;
+
+# 2020-10-05 11:46:15.988232
++select * from customer_customeradmin where user_id = '4326324';
+
+# 2020-10-05 11:47:14.009099
++with t as (select distinct user_profile_user.id, email from user_profile_user inner join customer_customeradmin on user_profile_user.customer_id = customer_customeradmin.customer_id where user_profile_user.customer_id = '600' and user_profile_user.deleted_date is null and user_profile_user.id = customer_customeradmin.user_id limit 10) select json_agg(t) from t;
+
+# 2020-10-05 11:48:15.108494
++with t as (select distinct user_profile_user.id, email from user_profile_user inner join customer_customeradmin on user_profile_user.customer_id = customer_customeradmin.customer_id where user_profile_user.customer_id = '600' and user_profile_user.deleted_date is null and user_profile_user.id = customer_customeradmin.user_id limit 1000) select json_agg(t) from t;
+
+# 2020-10-05 12:49:34.307424
++exit
+
+# 2020-10-05 14:34:41.030137
++\x\x
+
+# 2020-10-05 14:34:44.759077
++\x
+
+# 2020-10-05 14:35:01.707965
++select * from authorization_publicusercommunicationstrategy
+
+# 2020-10-05 14:35:27.760852
++with t as (select distinct user_profile_user.id, email from user_profile_user inner join customer_customeradmin on user_profile_user.customer_id = customer_customeradmin.customer_id where user_profile_user.customer_id = '509' and user_profile_user.deleted_date is null and user_profile_user.id = customer_customeradmin.user_id limit 1000) select json_agg(t) from t;
+
+# 2020-10-05 15:44:27.455997
++exit
+
+# 2020-10-07 23:16:14.602860
++\x
+
+# 2020-10-07 23:16:16.533938
++\dt
+
+# 2020-10-07 23:16:31.046453
++select * from user_user
+
+# 2020-10-07 23:16:37.021231
++select * from auth_user
+
+# 2020-10-13 16:21:43.773855
++\x
+
+# 2020-10-13 16:21:44.586720
++\dt
+
+# 2020-10-13 16:22:12.995299
++select * from user_profile_user where email = 'default.n_o_admin20201013161920129_2@sink.sendgrid.net'
+
+# 2020-10-13 16:22:21.117238
++\dt
+
+# 2020-10-13 16:23:23.040586
++select * from auth_group_permissions ORDER BY random() LIMIT 1;
+
+# 2020-10-13 16:23:30.617429
++\dt
+
+# 2020-10-13 16:23:48.516213
++select * from auth_client_permissions ORDER BY random() LIMIT 1;
+
+# 2020-10-13 16:23:51.194738
++\dt
+
+# 2020-10-13 16:24:04.006331
++select * from authorization_client_permissions ORDER BY random() LIMIT 1;
+
+# 2020-10-13 16:24:09.493695
++\dt
+
+# 2020-10-13 16:24:42.282152
++select * from customer_customeradmin_allowed_groups ORDER BY random() LIMIT 1;
+
+# 2020-10-13 16:25:02.741507
++select * from customer_customeradmin_allowed_groups WHERE customeradmin_id = '4493537';
+
+# 2020-10-13 16:29:40.251193
++select * from customer_customeradmin_allowed_groups WHERE id = '59437';
+
+# 2020-10-13 16:29:56.118085
++select * from customer_customeradmin_allowed_groups WHERE customeradmin_id = '4493547';
+
+# 2020-10-13 16:30:04.693528
++\dt
+
+# 2020-10-13 16:32:11.598253
++select * from user_profile_user_groups ORDER BY random() LIMIT 1;
+
+# 2020-10-13 16:32:16.529111
++\dt
+
+# 2020-10-13 16:32:32.556148
++select * from auth_group_permissions ORDER BY random() LIMIT 1;
+
+# 2020-10-13 16:32:52.578866
++select * from auth_group_permissions WHERE id = '59437';
+
+# 2020-10-13 16:38:39.144339
++\dt
+
+# 2020-10-13 16:39:02.517167
++select * from user_profile_user_user_permissions ORDER BY random() LIMIT 1;
+
+# 2020-10-13 16:39:05.648681
++\dt
+
+# 2020-10-13 16:39:20.888415
++select * from user_profile_user_groups ORDER BY random() LIMIT 1;
+
+# 2020-10-13 16:39:30.555634
++\dt
+
+# 2020-10-13 16:39:48.703781
++select * from user_profile_user ORDER BY random() LIMIT 1;
+
+# 2020-10-13 16:40:32.111722
++\dt
+
+# 2020-10-13 16:40:55.292283
++select * from auth_group ORDER BY random() LIMIT 1;
+
+# 2020-10-13 16:40:58.190737
++\dt
+
+# 2020-10-13 16:41:33.482571
++select * from auth_group_permissions ORDER BY random() LIMIT 1;
+
+# 2020-10-13 16:41:43.094106
++\dt
+
+# 2020-10-13 16:45:09.128114
++select * from notify_notification_groups ORDER BY random() LIMIT 1;
+
+# 2020-10-13 16:45:42.367884
++select * from notify_notification_groups WHERE group_id = 176925;
+
+# 2020-10-13 16:45:46.583640
++select * from notify_notification_groups WHERE group_id = '176925';
+
+# 2020-10-13 16:45:50.799787
++select * from notify_notification_groups WHERE group_id = "176925";
+
+# 2020-10-13 16:45:54.760208
++select * from notify_notification_groups WHERE group_id = '176925';
+
+# 2020-10-13 16:46:04.503085
++select * from notify_notification_groups WHERE id = '176925';
+
+# 2020-10-13 16:47:48.814885
++select * from notify_notification_groups where notification_id = 'c9e4abc8-ad80-40e1-94b0-fdbd60797ffa';
+
+# 2020-10-13 16:48:03.376803
++select * from * where id = 'c9e4abc8-ad80-40e1-94b0-fdbd60797ffa';
+
+# 2020-10-13 16:48:09.329182
++select * from  where id = 'c9e4abc8-ad80-40e1-94b0-fdbd60797ffa';
+
+# 2020-10-13 16:48:16.116056
++select * from notify_notification where id = 'c9e4abc8-ad80-40e1-94b0-fdbd60797ffa';
+
+# 2020-10-13 16:48:25.380203
++\dt
+
+# 2020-10-13 16:48:29.342363
++\dT
+
+# 2020-10-13 16:48:40.013498
++\dt information_schema
+
+# 2020-10-13 16:48:41.945147
++\dt 
+
+# 2020-10-13 16:48:50.379317
++\dt auth_group_permissions
+
+# 2020-10-13 16:48:57.030463
++\dT auth_group_permissions
+
+# 2020-10-13 16:48:59.345842
++\dt auth_group_permissions
+
+# 2020-10-13 16:49:16.729113
++select * from auth_group_permission ORDER BY random() LIMIT 1;
+
+# 2020-10-13 16:49:23.788782
++select * from auth_group_permissions ORDER BY random() LIMIT 1;
+
+# 2020-10-13 16:51:10.982272
++\dt
+
+# 2020-10-13 16:51:34.746069
++select * from customer_group order by random() limit 1;
+
+# 2020-10-13 16:51:57.188629
++\dt
+
+# 2020-10-13 16:52:17.195260
++select * from customer_customeradmin_allowed_groups order by random() limit 1;
+
+# 2020-10-13 16:52:46.105996
++select * from customer_customeradmin_allowed_groups where group_id = '59437';
+
+# 2020-10-13 16:52:49.333356
++\dt
+
+# 2020-10-13 16:53:27.779987
++select * from customer_customeradmin order by random() limit 1;
+
+# 2020-10-13 16:53:51.555181
++select * from customer_customeradmin where id = '59437';
+
+# 2020-10-13 16:54:53.832946
++select * from customer_customeradmin inner joins customer_customeradmin_allowed_groups on customer_customeradmin.id = customer_customeradmin_allowed_groups.customeradmin_id where id = '59437';
+
+# 2020-10-13 16:55:05.910821
++select * from customer_customeradmin inner join customer_customeradmin_allowed_groups on customer_customeradmin.id = customer_customeradmin_allowed_groups.customeradmin_id where id = '59437';
+
+# 2020-10-13 16:55:16.771805
++select * from customer_customeradmin inner join customer_customeradmin_allowed_groups on customer_customeradmin.id = customer_customeradmin_allowed_groups.customeradmin_id where customer_customeradmin.id = '59437';
+
+# 2020-10-13 16:57:17.116635
++exit

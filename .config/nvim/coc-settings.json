@@ -1,0 +1,18 @@
+{
+  "python.jediEnabled": false,
+  "diagnostic.displayByAle": true,
+  "python.linting.flake8Enabled": true,
+  "python.linting.enabled": true,
+  "python.linting.flake8Args": [
+    "--ignore=E501,C0301"
+  ],
+  "python.formatting.provider": "autopep8",
+  "python.disableInstallationCheck": true,
+  "python.venvFolders": [
+    "envs",
+    ".pyenv",
+    ".direnv",
+    "lib",
+    "lib/*"
+  ]
+}
