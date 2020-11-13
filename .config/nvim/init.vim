@@ -8,7 +8,6 @@ Plug 'airblade/vim-gitgutter'
 " Autocomplete
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 " Color Scheme
-" Plug 'jnurmine/Zenburn'
 "Plug 'lifepillar/vim-solarized8'
 Plug 'morhetz/gruvbox'
 Plug 'vim-airline/vim-airline-themes'
@@ -33,7 +32,7 @@ Plug 'frazrepo/vim-rainbow'
 Plug 'jiangmiao/auto-pairs'
 Plug 'machakann/vim-sandwich'
 "Auto indent for all file
-" Plug 'tpope/vim-sleuth'
+Plug 'tpope/vim-sleuth'
 
 call plug#end()
 
@@ -41,27 +40,32 @@ let mapleader = ' '
 "ALE-COC configs
 " let g:ale_disable_lsp = 1
 " Ale Config
-let g:ale_linters = {'python': ['flake8', 'pyls'], 'cucumber': ['cucumber'], 'javascript': ['prettier', 'eslint', 'tsserver'], 'json': ['jsonlint'], 'dockerfile': ['dockerfile_lint']}
-let g:ale_fixers = { '*': ['remove_trailing_lines', 'trim_whitespace'], 'python': ['autopep8', 'remove_trailing_lines', 'trim_whitespace'], 'javascript': ['prettier', 'eslint'], 'json': ['fixjson']}
-
 let g:ale_sign_error = '✘'
 let g:ale_sign_warning = '⚠'
 highlight ALEErrorSign ctermbg=NONE ctermfg=red
 highlight ALEWarningSign ctermbg=NONE ctermfg=yellow
+let g:ale_completion_enabled = 1
+let g:ale_set_balloons = 1
+let g:ale_set_highlights = 1
+let g:ale_fix_on_save = 1
+let g:ale_hover_to_preview = 0
+" let g:ale_hover_cursor = 1
+" let g:ale_cursor_detail = 1
+" let g:ale_close_preview_on_insert = 1
+let g:ale_completion_autoimport = 1
 let g:ale_python_flake8_options = '--max-line-length 200 --ignore E501,F403,F405,E252,W605'
 let g:ale_python_autopep8_options = '--max-line-length 200 --ignore E501,E252,W605 --aggressive --aggressive --aggressive'
 let g:ale_javascript_prettier_options = '--single-quote --tab-width 2 --trailing-comma es5'
-let g:ale_fix_on_save = 1
-let g:ale_completion_enabled = 1
-let g:ale_set_highlights = 1
-let g:ale_set_balloons = 1
-let g:ale_hover_to_preview = 1
+let g:ale_linters = {'python': ['flake8', 'pyls'], 'cucumber': ['cucumber'], 'javascript': ['prettier', 'eslint', 'tsserver'], 'json': ['jsonlint'], 'dockerfile': ['dockerfile_lint'], 'html': ['prettier'], 'css': ['prettier'] }
+let g:ale_fixers = { '*': ['remove_trailing_lines', 'trim_whitespace'], 'python': ['autopep8', 'remove_trailing_lines', 'trim_whitespace'], 'javascript': ['prettier', 'eslint'], 'html': ['prettier'], 'css': ['prettier'], 'json': ['fixjson'] }
 " ale completion select with tab or shift tab
 inoremap <silent><expr> <Tab>
       \ pumvisible() ? "\<C-n>" : "\<TAB>"
 inoremap <silent><expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-TAB>"
-noremap <Leader>gd :ALEGoToDefinition<CR>
+" noremap <Leader>gd :ALEGoToDefinition<CR>
+noremap <Leader>gd <C-]>
 noremap <Leader>gr :ALEFindReferences<CR>
+noremap <Leader>gt :ALEGoToTypeDefinition<CR>
 
 "Rainbow
 let g:rainbow_active = 1
@@ -123,14 +127,15 @@ set cmdheight=2
 set iskeyword+=-
 set showtabline=2 	"Always show tab bar
 set timeoutlen=500	"default timeoutlen is 1000ms
-set formatoptions-=cro 	"stop newline continuatino of comments
-set clipboard=unnamedplus "Copy past between vim and everything else
+set formatoptions-=cro 	"stop newline continuation of comments
+set clipboard=unnamedplus "Copy paste between vim and everything else
 set ruler
 if !has('nvim')
   set ttymouse=xterm2
 endif
 " on enter to get rid of highlight
 nnoremap <CR> :noh<CR><CR>
+" FZF
 set rtp+=/usr/local/bin/fzf
 let $FZF_DEFAULT_COMMAND='rg --files --smart-case'
 nnoremap <leader>f :Files<Cr>
@@ -164,12 +169,7 @@ let g:airline#extensions#tabline#enabled = 0
 let g:airline#extensions#tabline#left_sep = ' '
 let g:airline#extensions#tabline#left_alt_sep = '|'
 let g:airline#extensions#tabline#formatter = 'unique_tail'
-let g:airline_theme='ouo'
-"copy paste
-vmap <C-c> "+yi
-vmap <C-x> "+c
-vmap <C-v> c<ESC>"+p
-imap <C-v> <ESC>"+pa
+let g:airline_theme='base16_gruvbox_dark_hard'
 " move code down or up a line
 nnoremap <C-j> :m .+1<CR>==
 nnoremap <C-k> :m .-2<CR>==
@@ -179,15 +179,18 @@ vnoremap <C-j> :m '>+1<CR>gv=gv
 vnoremap <C-k> :m '<-2<CR>gv=gv
 "gutentags directory
 let g:gutentags_cache_dir='~/.vim/tags'
-"let g:gutentags_trace = 1
-"Switch between terminal and vim, ctrl+d to enter terminal and ctrl+d to
-"return to vim
-noremap <C-d> :sh<CR>
-if !has('nvim')
-  tnoremap <ESC> <C-w>:q!<CR>
-endif
+let g:gutentags_add_default_project_roots = 0
+let g:gutentags_project_root = ['package.json', '.git']
+let g:gutentags_generate_on_new = 1
+let g:gutentags_generate_on_missing = 1
+let g:gutentags_generate_on_write = 1
+let g:gutentags_generate_on_empty_buffer = 0
+let g:gutentags_ctags_extra_args = ['--fields=+ailmnS', '--tag-relative=yes']
+let g:gutentags_ctags_exclude = ['*.git', '*.svg', '*.hg', 'dist', 'build', 'cache', 'bin', 'compiled', 'bundle', 'example', 'vendor', '*.md', '*bundle*.js', '*build*.js', '*.pyc', '*.json', '.*rc', '*.min.*', '.tmp', '*.exe', '*.dll', '*.mp3', '*.ogg', '*.flac', '*.swp', '*.swo', '*.bmp', '*.gif', '*.ico', '*.jpg', '*.png', '*.rar', '*.zip', '*.tar', '*.tar.gz', '*.tar.xz', '*.tar.bz2', '*.pdf', '*.doc', '*.docx', '*.ppt', '*.pptx']
+
+" let g:gutentags_trace = 1
 if has('nvim')
-  tnoremap <ESC> <C-\><C-n>:q!<CR>
+  tnoremap <ESC> <C-\><C-n><CR>
 endif
 "git fugitive
 set diffopt+=vertical
@@ -220,7 +223,10 @@ autocmd Filetype javascript setlocal ts=2 sw=2 expandtab
 autocmd Filetype sh setlocal ts=2 sw=2 expandtab
 autocmd FileType cucumber setlocal ts=2 sts=2 sw=2 expandtab
 
+
 " Commands for vim-sandwhich
 " sdb = deletes the pairs of [], {}, "" depend on where your cursor highlights
 " sd{', [, }, etc]} = does the same thing as sdb but you must specify the char
 " sa{motion}{character} = will add backets between your motion
+set inccommand=nosplit
+set guicursor=
