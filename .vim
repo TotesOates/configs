@@ -13,7 +13,12 @@ pip3 install flake8
 brew install --HEAD universal-ctags/universal-ctags/universal-ctags
 pip3 install python-language-server
 npm install -g typescript 
+npm install -g typescript-language server
 npm install -g fixjson
 npm install jsonlint -g
 npm install -g dockerfile_lint
 https://github.com/romkatv/powerlevel10k
+
+npm install -g vscode-json-languageserver
+npm install -g vscode-css-languageserver-bin
+npm install -g vscode-html-languageserver-bin
