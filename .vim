@@ -11,7 +11,7 @@ brew install pgcli
 pip3 install autopep8
 pip3 install flake8
 brew install --HEAD universal-ctags/universal-ctags/universal-ctags
-pip3 install python-language-server
+// pip3 install python-language-server
 npm install -g typescript 
 npm install -g typescript-language server
 npm install -g fixjson
@@ -22,3 +22,4 @@ https://github.com/romkatv/powerlevel10k
 npm install -g vscode-json-languageserver
 npm install -g vscode-css-languageserver-bin
 npm install -g vscode-html-languageserver-bin
+npm install -g pyright
