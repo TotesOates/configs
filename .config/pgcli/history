@@ -1413,3 +1413,582 @@
 
 # 2021-01-06 11:05:39.727228
 +exit
+
+# 2021-01-15 11:57:08.039261
++select * from notify_notification where id = 'c4f584df-7057-49ac-b33a-4d46ef99571a';
+
+# 2021-01-15 11:57:10.941321
++\x
+
+# 2021-01-15 11:57:12.342154
++select * from notify_notification where id = 'c4f584df-7057-49ac-b33a-4d46ef99571a';
+
+# 2021-01-15 11:59:17.849915
++UPDATE notify_notification set created = '2021-01-10 17:45:23.655002+00', updated = '2021-01-10 17:45:23.655002+00' WHERE id = 'c4f584df-7057-49ac-b33a-4d46ef99571a';
+
+# 2021-01-15 11:59:20.632359
++select * from notify_notification where id = 'c4f584df-7057-49ac-b33a-4d46ef99571a';
+
+# 2021-01-15 12:00:30.349434
++select * from notify_notification JOIN notify_event ON notify_event.id = notify_notification.event_id where id = 'c4f584df-7057-49ac-b33a-4d46ef99571a';
+
+# 2021-01-15 12:00:40.155661
++select * from notify_notification JOIN notify_event ON notify_event.id = notify_notification.event_id where notify_notification.id = 'c4f584df-7057-49ac-b33a-4d46ef99571a';
+
+# 2021-01-15 12:01:15.766835
++select * from notify_event where id = '231984'
+
+# 2021-01-15 12:02:26.731047
++update notify_event set created = '2021-01-10 17:45:23.647499+00', updated = '2021-01-15 17:45:23.647499+00', effective_date = '2021-01-15 17:45:23.647499+00';
+
+# 2021-01-15 12:02:47.780230
++update notify_event set created = '2021-01-10 17:45:23.647499+00', updated = '2021-01-15 17:45:23.647499+00', effective_date = '2021-01-15 17:45:23.647499+00' where id = 231984;
+
+# 2021-01-15 12:02:50.662224
++select * from notify_event where id = '231984'
+
+# 2021-01-15 12:03:07.729524
++update notify_event set created = '2021-01-10 17:45:23.647499+00', updated = '2021-01-10 17:45:23.647499+00', effective_date = '2021-01-10 17:45:23.647499+00' where id = 231984;
+
+# 2021-01-15 12:36:40.300498
++exit
+
+# 2021-02-02 10:57:58.536254
++describe django_session
+
+# 2021-02-02 10:58:06.199089
++\x
+
+# 2021-02-02 10:58:09.030182
++/dt
+
+# 2021-02-02 10:58:10.977590
++\dt
+
+# 2021-02-02 11:10:41.431776
++select COUNT(*) from django_session
+
+# 2021-02-02 11:12:07.600262
++describe notify_event
+
+# 2021-02-02 11:12:20.390716
++\x
+
+# 2021-02-02 11:14:53.556349
++exit
+
+# 2021-02-02 12:21:34.633812
++describe django_session
+
+# 2021-02-02 12:21:38.364178
++select COUNT(*) from django_session
+
+# 2021-02-02 12:22:20.477896
++select * from django_session order by random() limit 1;
+
+# 2021-02-02 12:22:25.128416
++\x
+
+# 2021-02-02 12:22:26.488931
++select * from django_session order by random() limit 1;
+
+# 2021-02-02 12:22:55.696498
++\x
+
+# 2021-02-02 12:22:56.518760
++select * from django_session order by random() limit 1;
+
+# 2021-02-02 12:23:23.545744
++select COUNT(*) from django_session
+
+# 2021-02-02 12:23:43.254404
++SELECT COUNT(*) FROM django_session
+
+# 2021-02-02 12:23:50.418691
++exit
+
+# 2021-02-02 12:24:10.798164
++exit
+
+# 2021-02-04 15:55:36.105819
++describe customer_group
+
+# 2021-02-04 15:57:31.069130
++select * from customer_group like 'notify'
+
+# 2021-02-04 15:57:56.448703
++select * from customer_group where title like 'notify';
+
+# 2021-02-04 15:58:06.393281
++describe customer_group
+
+# 2021-02-04 15:58:16.561416
++select * from customer_group where name like 'notify';
+
+# 2021-02-04 15:58:19.458349
++\x
+
+# 2021-02-04 15:58:20.460541
++select * from customer_group where name like 'notify';
+
+# 2021-02-04 16:00:47.907224
++select * from customer_group where id = 5309;
+
+# 2021-02-04 16:01:21.971424
++select * from user_profile_user where id = 4365336;
+
+# 2021-02-04 16:01:49.642388
++describe customer_group
+
+# 2021-02-04 16:03:38.118649
++select * from customer_group_users JOIN customer_group on customer_group.id = customer_group_users.group_id where customer_group.id = 5309;
+
+# 2021-02-04 16:04:45.463979
++select * from customer_group_users JOIN customer_group on customer_group.id = customer_group_users.group_id where customer_group.id = 5309
+
+# 2021-02-04 16:05:09.953855
++select * from customer_group_users JOIN customer_group on customer_group.id = customer_group_users.group_id where customer_group.id = 5309 and customer_group_users.user_id = 4365336;
+
+# 2021-02-04 16:06:45.128479
++delete from customer_group_users where customer_group_users.id = 34908209 and customer_group_users.user_id = 4365336;
+
+# 2021-02-04 16:08:47.381661
++select * from customer_group_users JOIN customer_group on customer_group.id = customer_group_users.group_id where customer_group.id = 5309 and customer_group_users.user_id = 4365336;
+
+# 2021-02-04 16:08:52.168375
++select * from user_profile_user where id = 4365336;
+
+# 2021-02-04 16:08:59.650986
++select * from customer_group_users JOIN customer_group on customer_group.id = customer_group_users.group_id where customer_group.id = 5309;
+
+# 2021-02-04 16:09:15.170596
++select count(*) from customer_group_users JOIN customer_group on customer_group.id = customer_group_users.group_id where customer_group.id = 5309;
+
+# 2021-02-04 16:24:10.535079
++exit
+
+# 2021-02-05 11:10:42.505092
++select * from customer_group_users JOIN customer_group on customer_group.id = customer_group_users.group_id where customer_group.id = 5309;
+
+# 2021-02-05 11:10:45.052346
++\x
+
+# 2021-02-05 11:10:48.636109
++select * from customer_group_users JOIN customer_group on customer_group.id = customer_group_users.group_id where customer_group.id = 5309;
+
+# 2021-02-05 11:10:59.861972
++select * from customer_group_users JOIN customer_group on customer_group.id = customer_group_users.group_id where customer_group.id = 5309 and customer_group_users.user_id = 4365336;
+
+# 2021-02-05 11:11:15.665426
++delete from customer_group_users where customer_group_users.id = 34908209 and customer_group_users.user_id = 4365336;
+
+# 2021-02-05 11:11:32.418131
++delete from customer_group_users where customer_group_users.id = 34908210 and customer_group_users.user_id = 4365336;
+
+# 2021-02-05 11:44:03.071236
++INSERT INTO django_migrations (app, name, applied) VALUES ('notify', '0092_notification_foreign_key', NOW())
+
+# 2021-02-05 11:44:21.161371
++INSERT INTO django_migrations (app, name, applied) VALUES ('message', '0020_notification_foreign_key', NOW())
+
+# 2021-02-05 11:44:37.855068
++INSERT INTO django_migrations (app, name, applied) VALUES ('report', '0011_notification_foreign_key', NOW())
+
+# 2021-02-05 11:44:44.842830
++exit
+
+# 2021-02-05 14:16:28.821034
++INSERT INTO django_migrations (app, name, applied) VALUES ('notify', '0092_notification_foreign_key', NOW())
+
+# 2021-02-05 14:16:51.483183
++INSERT INTO django_migrations (app, name, applied) VALUES ('message', '0020_notification_foreign_key', NOW())
+
+# 2021-02-05 14:17:00.281516
++INSERT INTO django_migrations (app, name, applied) VALUES ('report', '0011_notification_foreign_key', NOW())
+
+# 2021-02-05 16:21:16.063886
++exit
+
+# 2021-02-05 16:21:19.095479
++exit
+
+# 2021-02-08 09:45:10.016024
++select * from customer_group where id = 5309;
+
+# 2021-02-08 09:45:15.498166
++\x
+
+# 2021-02-08 09:45:17.083489
++select * from customer_group where id = 5309;
+
+# 2021-02-08 09:48:19.996707
++select * from customer_group_users JOIN customer_group on customer_group.id = customer_group_users.group_id where customer_group.id = 5309 and customer_group_users.user_id = 4365336;
+
+# 2021-02-08 09:48:27.966455
++select * from customer_group_users JOIN customer_group on customer_group.id = customer_group_users.group_id where customer_group.id = 5309;
+
+# 2021-02-08 10:16:38.146278
++select * from customer_group_users JOIN customer_group on customer_group.id = customer_group_users.group_id where customer_group.id = 451 and customer_group_users.user_id = 4365336;
+
+# 2021-02-08 10:20:42.230796
++select * from customer_group_users JOIN customer_group on customer_group.id = customer_group_users.group_id where customer_group.id = 5309 and customer_group_users.user_id = 4365336;
+
+# 2021-02-08 10:21:15.483294
++delete from customer_group_users where customer_group_users.id = 34908211 and customer_group_users.user_id = 4365336;
+
+# 2021-02-08 10:21:22.586096
++select * from customer_group_users JOIN customer_group on customer_group.id = customer_group_users.group_id where customer_group.id = 5309 and customer_group_users.user_id = 4365336;
+
+# 2021-02-08 12:43:32.881320
++describe customer_customeradmin
+
+# 2021-02-08 16:22:29.098231
++exit
+
+# 2021-02-10 11:12:45.452274
++select * from notify_notificationplan where id = 25715
+
+# 2021-02-10 11:12:55.401457
++select * from notify_notificationplan where id = 25715;
+
+# 2021-02-10 11:13:02.247281
++select * from notify_notificationplan where id = '25715';
+
+# 2021-02-10 11:13:04.782768
++\x
+
+# 2021-02-10 11:13:06.254698
++select * from notify_notificationplan where id = '25715';
+
+# 2021-02-10 11:13:16.466861
++select * from notify_notificationplan order by random() limit 1;
+
+# 2021-02-10 11:13:30.049357
++select * from notify_notificationplan where title = '5';
+
+# 2021-02-10 11:14:33.986572
++select * from notify_notificationplan JOIN notify_notificationpla
+
+# 2021-02-10 11:14:50.832153
++describe notify_notificationplanmessage
+
+# 2021-02-10 11:15:43.233963
++select * from notify_notificationplan JOIN notify_notificationplanmessage on notify_notificationplanmessage.notificationplan.id = notify_notifcationplan.id
+
+# 2021-02-10 11:15:49.062542
++describe notify_notificationplanmessage
+
+# 2021-02-10 11:16:39.947877
++select * from notify_notificationplan JOIN notify_notificationplanmessage on notify_notificationplanmessage.notification_plan_id = notify_notifcationplan.id where notify_notificationplan.id = a5dd7d7f-6870-4fe1-a6c5-db9631cef5cc;
+
+# 2021-02-10 11:16:48.506725
++select * from notify_notificationplan JOIN notify_notificationplanmessage on notify_notificationplanmessage.notification_plan_id = notify_notifcationplan.id where notify_notificationplan.id = 'a5dd7d7f-6870-4fe1-a6c5-db9631cef5cc';
+
+# 2021-02-10 11:17:44.657143
++select * from notify_notificationplan JOIN notify_notificationplanmessage on notify_notificationplanmessage.notification_plan_id = 'a5dd7d7f-6870-4fe1-a6c5-db9631cef5cc';
+
+# 2021-02-10 11:18:53.544460
++select * from notify_notificationplan JOIN notify_notificationplanmessage on notify_notificationplanmessage.notification_plan_id = notify_notificationplan.id where notify_notificationplan.id = 'a5dd7d7f-6870-4fe1-a6c5-db9631cef5cc';
+
+# 2021-02-10 11:19:43.653453
++select count(*) from notify_notificationplan JOIN notify_notificationplanmessage on notify_notificationplanmessage.notification_plan_id = notify_notificationplan.id where notify_notificationplan.id = 'a5dd7d7f-6870-4fe1-a6c5-db9631cef5cc';
+
+# 2021-02-10 15:27:13.118564
++exit
+
+# 2021-02-11 13:14:14.867882
++select * from notify_notification where id = '00bf50c1-6f1d-43cc-ab93-9fc98b064d46';
+
+# 2021-02-11 13:14:17.919542
++\x
+
+# 2021-02-11 13:14:18.782208
++select * from notify_notification where id = '00bf50c1-6f1d-43cc-ab93-9fc98b064d46';
+
+# 2021-02-11 13:15:23.492619
++update notify_notification SET response = 'none' WHERE id = '00bf50c1-6f1d-43cc-ab93-9fc98b064d46';
+
+# 2021-02-11 13:15:25.605539
++select * from notify_notification where id = '00bf50c1-6f1d-43cc-ab93-9fc98b064d46';
+
+# 2021-02-11 13:16:30.061781
++update notify_notification SET response = 'recieved' WHERE id = '00bf50c1-6f1d-43cc-ab93-9fc98b064d46';
+
+# 2021-02-11 13:16:49.337345
++select * from notify_notification where id = '00bf50c1-6f1d-43cc-ab93-9fc98b064d46';
+
+# 2021-02-11 13:17:10.804416
++update notify_notification SET response = 'received' WHERE id = '00bf50c1-6f1d-43cc-ab93-9fc98b064d46';
+
+# 2021-02-11 13:17:12.559925
++select * from notify_notification where id = '00bf50c1-6f1d-43cc-ab93-9fc98b064d46';
+
+# 2021-02-11 13:19:05.573958
++\x
+
+# 2021-02-11 13:19:08.614824
++select * from notify_notification where id = '00bf50c1-6f1d-43cc-ab93-9fc98b064d46';
+
+# 2021-02-11 13:21:02.792302
++select * from notify_notification where id = '937068aa-436d-49b9-ad71-580e596a8792';
+
+# 2021-02-11 13:21:20.077267
++update notify_notification set response = 'received' where id = '937068aa-436d-49b9-ad71-580e596a8792';
+
+# 2021-02-11 13:21:42.015141
++update notify_notification SET response = 'received' WHERE id = '937068aa-436d-49b9-ad71-580e596a8792';
+
+# 2021-02-11 13:21:50.103691
++select * from notify_notification where id = '937068aa-436d-49b9-ad71-580e596a8792';
+
+# 2021-02-11 13:22:09.325399
++select * from notify_notification where id = '937068aa-436d-49b9-ad71-580e596a8792';
+
+# 2021-02-11 13:22:22.904743
++update notify_notification SET response = 'none' WHERE id = '937068aa-436d-49b9-ad71-580e596a8792';
+
+# 2021-02-11 13:22:24.116708
++select * from notify_notification where id = '937068aa-436d-49b9-ad71-580e596a8792';
+
+# 2021-02-11 13:33:16.518431
++select * from notify_notification where id = '00bf50c1-6f1d-43cc-ab93-9fc98b064d46';
+
+# 2021-02-11 13:34:09.489781
++update notify_notification SET response = 'none' WHERE id = '00bf50c1-6f1d-43cc-ab93-9fc98b064d46';
+
+# 2021-02-11 13:34:12.415746
++select * from notify_notification where id = '00bf50c1-6f1d-43cc-ab93-9fc98b064d46';
+
+# 2021-02-11 13:35:01.776293
++select * from notify_notification where id = '00bf50c1-6f1d-43cc-ab93-9fc98b064d46';
+
+# 2021-02-11 13:42:28.784963
++\x
+
+# 2021-02-11 13:42:29.452531
++select * from notify_notification where id = '00bf50c1-6f1d-43cc-ab93-9fc98b064d46';
+
+# 2021-02-11 13:42:48.591241
++exit
+
+# 2021-02-11 13:42:56.336380
++select * from notify_notification where id = '00bf50c1-6f1d-43cc-ab93-9fc98b064d46';
+
+# 2021-02-11 13:42:58.658109
++\x
+
+# 2021-02-11 13:42:59.348946
++select * from notify_notification where id = '00bf50c1-6f1d-43cc-ab93-9fc98b064d46';
+
+# 2021-02-11 13:43:03.001751
++exit
+
+# 2021-02-22 09:11:57.529881
++\x
+
+# 2021-02-22 09:12:19.016308
++select * from user_profile_user where id = 4365336;
+
+# 2021-02-22 09:12:56.933524
++select * from user_profile_user_groups ORDER BY random() LIMIT 1;
+
+# 2021-02-22 09:13:07.118621
++describe user_profile_user_groups
+
+# 2021-02-22 09:13:15.181383
++select * from user_profile_user_groups ORDER BY random() LIMIT 1;
+
+# 2021-02-22 09:13:43.400152
++select * from notify_notification_groups ORDER BY random() limit 1;
+
+# 2021-02-22 09:14:22.174852
++select * from user_profile_user_groups
+
+# 2021-02-22 09:14:24.333880
++select * from user_profile_user_groups;
+
+# 2021-02-22 09:14:34.854707
++select * from user_profile_user order by random() limit 1;
+
+# 2021-02-22 09:15:25.134310
++select * from user_profile_user_groups order by random() limit 1
+
+# 2021-02-22 09:15:27.156612
++select * from user_profile_user_groups order by random() limit 1;
+
+# 2021-02-22 09:15:29.275926
++exit
+
+# 2021-02-22 09:15:40.950863
++\x
+
+# 2021-02-22 09:15:45.061300
++select * from user_profile_user_groups order by random() limit 1;
+
+# 2021-02-22 09:15:47.074061
++exit
+
+# 2021-02-22 09:16:18.376021
++select * from user_profile_user_groups order by random() limit 1;
+
+# 2021-02-22 09:16:36.771280
++select * from user_profile_user_groups;
+
+# 2021-02-22 09:16:56.800439
++exit
+
+# 2021-02-22 09:40:07.156059
++\x
+
+# 2021-02-22 09:40:20.483427
++select * from customer_customeradmin_allowed_groups order by random() limit 1;
+
+# 2021-02-22 09:40:48.358507
++describe customer_customeradmin
+
+# 2021-02-22 09:42:49.270790
++select * from customer_customeradmin_allowed_groups JOIN customer_customeradmin ON customer_customeradmin.user_id = customer_customeradmin_allowed_groups.user_id where user_id = 4365336;
+
+# 2021-02-22 09:43:04.213037
++describe customer_customeradmin_allowed_groups
+
+# 2021-02-22 09:44:02.933045
++select * from customer_customeradmin_allowed_groups JOIN customer_customeradmin ON customer_customeradmin.id = customer_customeradmin_allowed_groups.customeradmin_id where customer_customeradmin.user_id = 4365336;
+
+# 2021-02-22 09:44:15.771995
++describe customer_customeradmin_allowed_groups
+
+# 2021-02-22 09:44:21.650443
++describe customer_customeradmin
+
+# 2021-02-22 09:45:15.103063
++select id from customer_customeradmin_allowed_groups JOIN customer_customeradmin ON customer_customeradmin.id = customer_customeradmin_allowed_groups.customeradmin_id where customer_customeradmin.user_id = 4365336;
+
+# 2021-02-22 09:45:28.264105
++select customer_customeradmin_allowed_group9s.id from customer_customeradmin_allowed_groups JOIN customer_customeradmin ON customer_customeradmin.id = customer_customeradmin_allowed_groups.customeradmin_id where customer_customeradmin.user_id = 4365336;
+
+# 2021-02-22 09:45:33.987119
++select id from customer_customeradmin_allowed_groups JOIN customer_customeradmin ON customer_customeradmin.id = customer_customeradmin_allowed_groups.customeradmin_id where customer_customeradmin.user_id = 4365336;
+
+# 2021-02-22 09:45:40.580815
++select * from customer_customeradmin_allowed_groups JOIN customer_customeradmin ON customer_customeradmin.id = customer_customeradmin_allowed_groups.customeradmin_id where customer_customeradmin.user_id = 4365336;
+
+# 2021-02-22 09:47:50.359928
++DELETE from customer_customeradmin_allowed_groups where id = 56019;
+
+# 2021-02-22 09:50:45.541464
++select * from customer_customeradmin_allowed_groups JOIN customer_customeradmin ON customer_customeradmin.id = customer_customeradmin_allowed_groups.customeradmin_id where customer_customeradmin.user_id = 4365336;
+
+# 2021-02-22 10:56:13.477831
++exit
+
+# 2021-02-22 11:05:49.398957
++select * from customer_customeradmin_allowed_groups JOIN customer_customeradmin ON customer_customeradmin.id = customer_customeradmin_allowed_groups.customeradmin_id where customer_customeradmin.user_id = 4365336;
+
+# 2021-02-22 11:05:51.347725
++\x
+
+# 2021-02-22 11:05:52.919476
++select * from customer_customeradmin_allowed_groups JOIN customer_customeradmin ON customer_customeradmin.id = customer_customeradmin_allowed_groups.customeradmin_id where customer_customeradmin.user_id = 4365336;
+
+# 2021-02-22 11:06:29.512997
++DELETE from customer_customeradmin_allowed_groups where id = 58361;
+
+# 2021-02-22 11:09:32.763387
++exit
+
+# 2021-02-25 09:34:16.266990
++select * from notify_notificationplan where id = '45ab17db-bf34-44ea-aa10-65d97047cd2c';
+
+# 2021-02-25 09:34:18.742364
++\x
+
+# 2021-02-25 09:34:19.857301
++select * from notify_notificationplan where id = '45ab17db-bf34-44ea-aa10-65d97047cd2c';
+
+# 2021-02-25 09:34:33.960959
++describe notify_notificationplanmessage
+
+# 2021-02-25 09:34:48.995208
++select * from notify_notificationplanmessage where notification_plan_id = '45ab17db-bf34-44ea-aa10-65d97047cd2c';
+
+# 2021-02-25 09:57:39.823921
++exit
+
+# 2021-03-05 12:24:16.749928
++select * from notify_notification where id = 'e95ae097-80d9-44b6-87ba-599be3cb0a1c';
+
+# 2021-03-05 12:24:19.056928
++\x
+
+# 2021-03-05 12:24:20.036368
++select * from notify_notification where id = 'e95ae097-80d9-44b6-87ba-599be3cb0a1c';
+
+# 2021-03-05 12:24:38.096315
++select * from notify_notification where id = '097a0a7b-6f14-4957-a55f-d707928ad033';
+
+# 2021-03-05 12:25:09.725344
++select * from notify_notification where id = 'e95ae097-80d9-44b6-87ba-599be3cb0a1c';
+
+# 2021-03-05 13:10:58.868044
++exit
+
+# 2021-03-05 13:54:41.772966
++select * from notify_notification where id = '3afb09d9-f68e-40ea-83f2-6edb8279930a';
+
+# 2021-03-05 13:54:43.965526
++\x
+
+# 2021-03-05 13:54:44.819547
++select * from notify_notification where id = '3afb09d9-f68e-40ea-83f2-6edb8279930a';
+
+# 2021-03-05 13:55:11.590247
++select * from notify_notificationmessage ORDER By random() limit 1;
+
+# 2021-03-05 13:55:33.199122
++select * from notify_notificationmessage where notification_id = '3afb09d9-f68e-40ea-83f2-6edb8279930a';
+
+# 2021-03-05 13:56:44.518818
++select message from notify_notification where id = '3afb09d9-f68e-40ea-83f2-6edb8279930a';
+
+# 2021-03-05 13:56:58.434242
++select * from notify_notificationmessage where notification_id = '3afb09d9-f68e-40ea-83f2-6edb8279930a';
+
+# 2021-03-05 13:57:00.785881
++\x
+
+# 2021-03-05 13:57:01.724999
++select * from notify_notificationmessage where notification_id = '3afb09d9-f68e-40ea-83f2-6edb8279930a';
+
+# 2021-03-05 13:57:09.896094
++select message from notify_notificationmessage where notification_id = '3afb09d9-f68e-40ea-83f2-6edb8279930a';
+
+# 2021-03-05 13:58:02.566676
++exit
+
+# 2021-03-05 13:58:04.557400
++exit
+
+# 2021-03-05 16:13:48.847156
++select * from notify_notificationmessage where notification_id = '89e93764-734e-4e56-bec4-de61273d4619';
+
+# 2021-03-05 16:13:50.738982
++\x
+
+# 2021-03-05 16:13:51.590176
++select * from notify_notificationmessage where notification_id = '89e93764-734e-4e56-bec4-de61273d4619';
+
+# 2021-03-05 17:08:03.438662
++exit
+
+# 2021-03-09 14:26:20.927551
++select * from notify_notificationmessage where notification_id = '709df550-a4c3-42f2-870c-82c5ee8f8c65';
+
+# 2021-03-09 14:26:23.173115
++\x
+
+# 2021-03-09 14:26:24.264962
++select * from notify_notificationmessage where notification_id = '709df550-a4c3-42f2-870c-82c5ee8f8c65';
+
+# 2021-03-09 15:42:29.131930
++exit
