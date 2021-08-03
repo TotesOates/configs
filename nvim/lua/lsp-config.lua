@@ -1,5 +1,7 @@
 -- pip3 install python-language-server
-require'lspconfig'.pyls.setup{}
+-- require'lspconfig'.pyls.setup{}
+-- npm install -g pyright
+require'lspconfig'.pyright.setup{}
 -- npm install -g typescript typescript-language-server
 require'lspconfig'.tsserver.setup{}
 -- npm install -g vscode-html-languageserver-bin

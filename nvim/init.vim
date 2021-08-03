@@ -55,8 +55,6 @@ if !exists('g:vscode')
 
 nnoremap <leader>du :UndotreeToggle<CR>
 
-"neovim completion
-" set completeopt=menuone,noinsert,noselect
 
 nnoremap <leader>gd <Cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <leader>K <Cmd>lua vim.lsp.buf.hover()<CR>
@@ -86,35 +84,39 @@ let g:ale_hover_to_preview = 0
 let g:ale_hover_cursor = 1
 
 let g:ale_completion_autoimport = 1
-let g:ale_python_flake8_options = '--max-line-length 200 --ignore E501,F403,F405,E252,W605'
-let g:ale_python_autopep8_options = '--max-line-length 200 --ignore E501,E252,W605 --aggressive --aggressive --aggressive'
+let g:ale_python_flake8_options = '--max-line-length 99'
+let g:ale_python_autopep8_options = '--max-line-length 99 --aggressive --aggressive --aggressive'
+let g:ale_python_black_options = '--max-line-length 99'
 let g:ale_javascript_prettier_options = '--single-quote --tab-width 4 --trailing-comma es5 --print-width 150'
-let g:ale_linters = {'python': ['flake8', 'pyls'], 'cucumber': ['cucumber'], 'javascript': ['prettier', 'eslint', 'tsserver'], 'json': ['jsonlint'], 'dockerfile': ['dockerfile_lint'], 'html': ['prettier'], 'css': ['prettier'] }
+let g:ale_linters = {'python': ['flake8', 'pyls', 'black'], 'cucumber': ['cucumber'], 'javascript': ['prettier', 'eslint', 'tsserver'], 'json': ['jsonlint'], 'dockerfile': ['dockerfile_lint'], 'html': ['prettier'], 'css': ['prettier'] }
 let g:ale_fixers = { '*': ['remove_trailing_lines', 'trim_whitespace'], 'python': ['autopep8'], 'javascript': ['prettier', 'eslint'], 'html': ['prettier'], 'css': ['prettier'], 'json': ['fixjson'] }
 
 "Rainbow
 let g:rainbow_active = 1
 
-"Nerd tree toggle open
-noremap <silent><Leader>dd :NERDTreeToggle<CR>
-"nerdtree open to current opened file
-noremap <silent> <Leader>df :NERDTreeFind<CR>
-"NerdTree refresh
-noremap <silent> <Leader>dr :NERDTreeRefreshRoot<CR>
+" Nerd tree toggle open
+ noremap <silent><Leader>dd :NERDTreeToggle<CR>
+" nerdtree open to current opened file
+ noremap <silent> <Leader>df :NERDTreeFind<CR>
+" NerdTree refresh
+ noremap <silent> <Leader>dr :NERDTreeRefreshRoot<CR>
 
 
-let NERDTreeQuitOnOpen = 1
-let NERDTreeShowHidden=1
-let NERDTreeMinimalUI = 0
-let NERDTreeDirArrows = 1
-let NERDTreeWinSize = 50
+ let NERDTreeQuitOnOpen = 1
+ let NERDTreeShowHidden=1
+ let NERDTreeMinimalUI = 0
+ let NERDTreeDirArrows = 1
+ let NERDTreeWinSize = 50
 
+let g:netrw_preview = 1
+let g:netrw_browse_split = 3
+let g:netrw_winsize = 25
+ let g:netrw_keepdir=0
 " python highlighting
 let python_highlight_all=1
 
 "color schemes
 let g:gruvbox_contrast_dark = 'hard'
-let g:gruvbox_improved_warnings = 1
 let g:gruvbox_italic = 1
 colorscheme gruvbox
 "Standard VIM settings
@@ -156,7 +158,7 @@ set showtabline=2 	"Always show tab bar
 set timeoutlen=500	"default timeoutlen is 1000ms
 set formatoptions-=cro 	"stop newline continuation of comments
 au BufEnter * set fo-=c fo-=r fo-=o
-set clipboard=unnamedplus "Copy paste between vim and everything else
+set clipboard+=unnamedplus "Copy paste between vim and everything else
 set ruler
 set inccommand=nosplit
 set guicursor=
@@ -206,21 +208,6 @@ inoremap <C-j> <Esc>:m .+1<CR>==gi
 inoremap <C-k> <Esc>:m .-2<CR>==gi
 vnoremap <C-j> :m '>+1<CR>gv=gv
 vnoremap <C-k> :m '<-2<CR>gv=gv
-"gutentags directory
-let g:gutentags_cache_dir='~/.vim/tags'
-let g:gutentags_add_default_project_roots = 0
-let g:gutentags_project_root = ['package.json', '.git']
-let g:gutentags_generate_on_new = 1
-let g:gutentags_generate_on_missing = 1
-let g:gutentags_generate_on_write = 1
-let g:gutentags_generate_on_empty_buffer = 0
-let g:gutentags_ctags_extra_args = ['--fields=+ailmnS', '--tag-relative=yes']
-let g:gutentags_ctags_exclude = ['*.git', '*.svg', '*.hg', 'dist', 'build', 'cache', 'bin', 'compiled', 'bundle', 'example', 'vendor', '*.md', '*bundle*.js', '*build*.js', '*.pyc', '*.json', '.*rc', '*.min.*', '.tmp', '*.exe', '*.dll', '*.mp3', '*.ogg', '*.flac', '*.swp', '*.swo', '*.bmp', '*.gif', '*.ico', '*.jpg', '*.png', '*.rar', '*.zip', '*.tar', '*.tar.gz', '*.tar.xz', '*.tar.bz2', '*.pdf', '*.doc', '*.docx', '*.ppt', '*.pptx']
-
-" let g:gutentags_trace = 1
-if has('nvim')
-  tnoremap <leader><ESC> <C-\><C-n><CR>
-endif
 "git fugitive
 set diffopt+=vertical
 noremap <leader>gs :Git<CR>
