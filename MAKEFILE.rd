@@ -20,3 +20,7 @@ brew install --HEAD neovim
 
 // install all plugins
 open nvim, run :PlugInstall
+
+// install treesitter languages
+:TSInstall <language>
+// install language servers
