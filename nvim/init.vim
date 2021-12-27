@@ -21,9 +21,17 @@ Plug 'tpope/vim-surround'
 "Auto indent for all file
 Plug 'tpope/vim-sleuth'
 " .5 neovim
-Plug 'neovim/nvim-lspconfig'
-Plug 'hrsh7th/nvim-compe'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'neovim/nvim-lspconfig'
+" completion
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
+" For vsnip users.
+Plug 'hrsh7th/cmp-vsnip'
+Plug 'hrsh7th/vim-vsnip'
 "undotree
 Plug 'mbbill/undotree'
 
@@ -162,6 +170,7 @@ set clipboard+=unnamedplus "Copy paste between vim and everything else
 set ruler
 set inccommand=nosplit
 set guicursor=
+set completeopt=menu,menuone,noselect
 if !has('nvim')
   set ttymouse=xterm2
 endif
