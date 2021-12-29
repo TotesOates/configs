@@ -4,7 +4,7 @@
 require'lspconfig'.pyright.setup{}
 -- npm install -g typescript typescript-language-server
 require'lspconfig'.tsserver.setup{}
--- npm install -g vscode-html-languageserver-bin
+-- npm i -g vscode-langservers-extracted
 require'lspconfig'.html.setup{}
 -- npm install -g vscode-css-languageserver-bin
 require'lspconfig'.cssls.setup{}
