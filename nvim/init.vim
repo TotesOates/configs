@@ -9,8 +9,6 @@ Plug 'dense-analysis/ale'
 Plug 'preservim/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 "super search
-Plug 'junegunn/fzf.vim'
-Plug 'junegunn/fzf', {'do': { -> fzf#install() }}
 Plug 'nvim-lua/plenary.nvim'
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.x' }
 "nvim airline
@@ -22,7 +20,6 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-surround'
 "Auto indent for all file
 Plug 'tpope/vim-sleuth'
-
 " LSP Support 
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'neovim/nvim-lspconfig'
@@ -70,23 +67,8 @@ nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 " Ale Config
 let g:ale_disable_lsp = 1
-" let g:ale_sign_error = '✘'
-" let g:ale_sign_warning = '⚠'
-" highlight ALEErrorSign guibg=red guifg=red
-" highlight ALEError guibg=red guifg=red
-" highlight ALEErrorLine guibg=red guifg=red ctermfg=red
-" highlight ALEWarningSign guibg=red guifg=yellow ctermfg=red
-" highlight ALEWarning ctermbg=DarkMagenta ctermfg=red
-" let g:ale_set_signs = 1
-" let g:ale_set_balloons = 1
-" let g:ale_set_highlights = 1
-" let g:ale_fix_on_save = 0
 nnoremap <leader>fx :ALEFix<CR>
-" let g:ale_hover_to_preview = 0
-" let g:ale_hover_cursor = 1
 
-" let g:ale_completion_autoimport = 1
-" let g:ale_python_black_options = '--max-line-length 99'
 let g:ale_javascript_prettier_options = '--single-quote --tab-width 4 --trailing-comma es5 --print-width 150'
 let g:ale_linters = {'python': ['pyright'], 'cucumber': ['cucumber'], 'javascript': ['prettier', 'eslint', 'tsserver'], 'json': ['jsonlint'], 'dockerfile': ['dockerfile_lint'], 'html': ['prettier'], 'css': ['prettier'], 'terraform': ['checkov'], 'go': ['gopls'] }
 let g:ale_fixers = { '*': ['remove_trailing_lines', 'trim_whitespace'], 'python': ['black'], 'javascript': ['prettier', 'eslint'], 'html': ['prettier'], 'css': ['prettier'], 'json': ['fixjson'], 'terraform': ['terraform'] }
@@ -169,39 +151,6 @@ if !has('nvim')
 endif
 " on enter to get rid of highlight
 nnoremap <CR> :noh<CR><CR>
-" FZF
-"set rtp+=/usr/local/bin/fzf
-"let $FZF_DEFAULT_COMMAND='rg --files --smart-case'
-"nnoremap <leader>f :Files<Cr>
-"if !has('nvim')
-"  let g:fzf_preview_window='right:40%'
-"  let g:fzf_layout = { 'down': '50%' }
-"endif
-"if has('nvim')
-"  let g:fzf_layout = { 'down': '70%' }
-"  let g:fzf_preview_window='right:50%'
-"endif
-
-"function! RipgrepFzf(query, fullscreen)
-"  let command_fmt = 'rg --glob --no-ignore -C --column --line-number --no-heading --color=always --smart-case -i -U -- %s || true'
-"  let initial_command = printf(command_fmt, shellescape(a:query))
-"  let reload_command = printf(command_fmt, '{q}')
-"  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
-"  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
-"endfunction
-
-"command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
-""maps leader w to open up ripgrep text search
-"nmap <leader>w :Rg<Cr>
-""search for things everything that isn't node_modules or in gitignore
-"command! -bang -nargs=*  All
-"      \ call fzf#run(fzf#wrap({'source': 'rg --files --hidden --no-ignore-vcs --smart-case --glob "!{node_modules/*,.git/*}"', 'down': '40%', 'options': '--expect=ctrl-t,ctrl-x,ctrl-v --multi --reverse' }))
-"nnoremap <silent> <leader>o :All<cr>
-
-
-"command! -bang -nargs=*  CustomFiles
-"      \ call fzf#run(fzf#wrap({'source': 'rg --files --hidden --smart-case --glob "!{node_modules/*,.git/*}"', 'down': '40%', 'options': '--expect=ctrl-t,ctrl-x,ctrl-v --multi --reverse' }))
-"nnoremap <silent> <leader>f :CustomFiles<cr>
 
 " move code down or up a line
 nnoremap <C-j> :m .+1<CR>==
@@ -244,4 +193,3 @@ noremap <leader>src :source ~/.config/nvim/init.vim<CR>
 " ysiw[new item], example: ysiw( will change thing to (thing)
 " In view mode, S[new item], example: vf0S{} for the word some0 will change to
 " {some0}
-endif
