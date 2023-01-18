@@ -11,6 +11,8 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 "super search
 Plug 'junegunn/fzf.vim'
 Plug 'junegunn/fzf', {'do': { -> fzf#install() }}
+Plug 'nvim-lua/plenary.nvim'
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.x' }
 "nvim airline
 Plug 'hoob3rt/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
@@ -20,46 +22,34 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'tpope/vim-surround'
 "Auto indent for all file
 Plug 'tpope/vim-sleuth'
-" .5 neovim
+
+" LSP Support 
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'neovim/nvim-lspconfig'
+Plug 'williamboman/mason.nvim'
+Plug 'williamboman/mason-lspconfig.nvim'
 " completion
-Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
-Plug 'hrsh7th/cmp-cmdline'
-Plug 'hrsh7th/nvim-cmp'
-" For vsnip users.
-Plug 'hrsh7th/cmp-vsnip'
-Plug 'hrsh7th/vim-vsnip'
+Plug 'saadparwaiz1/cmp_luasnip'
+Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-nvim-lua'
+"  Snippets
+Plug 'L3MON4D3/LuaSnip'
+Plug 'rafamadriz/friendly-snippets'
+" https://github.com/VonHeikemen/lsp-zero.nvim
+Plug 'VonHeikemen/lsp-zero.nvim'
 "undotree
 Plug 'mbbill/undotree'
+"tab-merge
+Plug 'vim-scripts/Tabmerge'
 
 call plug#end()
 let g:python3_host_prog = '/usr/bin/python3'
 let mapleader = ' '
 luafile ~/.config/nvim/lua/init.lua
 
-if exists('g:vscode')
-  nnoremap <leader>gd <Cmd>call VSCodeNotify('editor.action.revealDefinition')<CR>
-  nnoremap <leader> gD <Cmd>call VSCodeNotify('editor.action.peekDefinition')<CR>
-  nnoremap <leader>f <Cmd> call VSCodeNotify('workbench.action.quickOpen')<CR>
-  nnoremap <leader>w <Cmd> call VSCodeNotify('workbench.action.findInFiles')<CR>
-  nnoremap <leader>dd <Cmd> call VSCodeNotify('workbench.view.explorer')<CR>
-  " tab controls
-  nnoremap <leader>1 <Cmd> call VSCodeNotify('workbench.action.openEditorAtIndex1')<CR>
-  nnoremap <leader>2 <Cmd> call VSCodeNotify('workbench.action.openEditorAtIndex2')<CR>
-  nnoremap <leader>3 <Cmd> call VSCodeNotify('workbench.action.openEditorAtIndex3')<CR>
-  nnoremap <leader>4 <Cmd> call VSCodeNotify('workbench.action.openEditorAtIndex4')<CR>
-  nnoremap <leader>5 <Cmd> call VSCodeNotify('workbench.action.openEditorAtIndex5')<CR>
-  nnoremap <leader>6 <Cmd> call VSCodeNotify('workbench.action.openEditorAtIndex6')<CR>
-  nnoremap <leader>7 <Cmd> call VSCodeNotify('workbench.action.openEditorAtIndex7')<CR>
-  nnoremap <leader>8 <Cmd> call VSCodeNotify('workbench.action.openEditorAtIndex8')<CR>
-  nnoremap <leader>9 <Cmd> call VSCodeNotify('workbench.action.openEditorAtIndex9')<CR>
-  nnoremap <leader>l <Cmd> call VSCodeNotify('workbench.action.nextEditor')<CR>
-  nnoremap <leader>h <Cmd> call VSCodeNotify('workbench.action.previousEditor')<CR>
-endif
-if !exists('g:vscode')
 
 nnoremap <leader>du :UndotreeToggle<CR>
 
@@ -73,31 +63,33 @@ nnoremap <leader>gr <Cmd>lua vim.lsp.buf.references()<CR>
 nnoremap <leader>g0 <Cmd>lua vim.lsp.buf.document_symbol()<CR>
 nnoremap <leader>gW <Cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 " nnoremap <leader>gd <Cmd>lua vim.lsp.buf.declaration()<CR>
-"ALE-COC configs
-let g:ale_disable_lsp = 0
+" Find files using Telescope command-line sugar.
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 " Ale Config
-let g:ale_sign_error = '✘'
-let g:ale_sign_warning = '⚠'
-highlight ALEErrorSign guibg=red guifg=red
-highlight ALEError guibg=red guifg=red
-highlight ALEErrorLine guibg=red guifg=red ctermfg=red
-highlight ALEWarningSign guibg=red guifg=yellow ctermfg=red
-highlight ALEWarning ctermbg=DarkMagenta ctermfg=red
-let g:ale_set_signs = 1
-let g:ale_set_balloons = 1
-let g:ale_set_highlights = 1
-let g:ale_fix_on_save = 0
+let g:ale_disable_lsp = 1
+" let g:ale_sign_error = '✘'
+" let g:ale_sign_warning = '⚠'
+" highlight ALEErrorSign guibg=red guifg=red
+" highlight ALEError guibg=red guifg=red
+" highlight ALEErrorLine guibg=red guifg=red ctermfg=red
+" highlight ALEWarningSign guibg=red guifg=yellow ctermfg=red
+" highlight ALEWarning ctermbg=DarkMagenta ctermfg=red
+" let g:ale_set_signs = 1
+" let g:ale_set_balloons = 1
+" let g:ale_set_highlights = 1
+" let g:ale_fix_on_save = 0
 nnoremap <leader>fx :ALEFix<CR>
-let g:ale_hover_to_preview = 0
-let g:ale_hover_cursor = 1
+" let g:ale_hover_to_preview = 0
+" let g:ale_hover_cursor = 1
 
-let g:ale_completion_autoimport = 1
-let g:ale_python_flake8_options = '--max-line-length 99'
-let g:ale_python_autopep8_options = '--max-line-length 99 --aggressive --aggressive --aggressive'
-let g:ale_python_black_options = '--max-line-length 99'
+" let g:ale_completion_autoimport = 1
+" let g:ale_python_black_options = '--max-line-length 99'
 let g:ale_javascript_prettier_options = '--single-quote --tab-width 4 --trailing-comma es5 --print-width 150'
-let g:ale_linters = {'python': ['flake8', 'pyls', 'black'], 'cucumber': ['cucumber'], 'javascript': ['prettier', 'eslint', 'tsserver'], 'json': ['jsonlint'], 'dockerfile': ['dockerfile_lint'], 'html': ['prettier'], 'css': ['prettier'] }
-let g:ale_fixers = { '*': ['remove_trailing_lines', 'trim_whitespace'], 'python': ['autopep8'], 'javascript': ['prettier', 'eslint'], 'html': ['prettier'], 'css': ['prettier'], 'json': ['fixjson'] }
+let g:ale_linters = {'python': ['pyright'], 'cucumber': ['cucumber'], 'javascript': ['prettier', 'eslint', 'tsserver'], 'json': ['jsonlint'], 'dockerfile': ['dockerfile_lint'], 'html': ['prettier'], 'css': ['prettier'], 'terraform': ['checkov'], 'go': ['gopls'] }
+let g:ale_fixers = { '*': ['remove_trailing_lines', 'trim_whitespace'], 'python': ['black'], 'javascript': ['prettier', 'eslint'], 'html': ['prettier'], 'css': ['prettier'], 'json': ['fixjson'], 'terraform': ['terraform'] }
 
 "Rainbow
 let g:rainbow_active = 1
@@ -130,7 +122,6 @@ colorscheme gruvbox
 "Standard VIM settings
 syntax enable
 set termguicolors
-set t_Co=256 		"Support 256 colors
 set background=dark
 set ic 			"search highlight
 set hls is 		"This unsets the "last search pattern" register by hitting return
@@ -155,6 +146,8 @@ set hidden		"prevent multiple buffers from opening more buffers
 "new setting
 " set spell
 " set spelllang=en_us
+set incsearch           "will highlight search while typing out
+
 set smarttab		"make tab realize tab counts
 set expandtab		"coverts tabs top spaces
 set smartindent
@@ -177,38 +170,38 @@ endif
 " on enter to get rid of highlight
 nnoremap <CR> :noh<CR><CR>
 " FZF
-set rtp+=/usr/local/bin/fzf
-let $FZF_DEFAULT_COMMAND='rg --files --smart-case'
-nnoremap <leader>f :Files<Cr>
-if !has('nvim')
-  let g:fzf_preview_window='right:40%'
-  let g:fzf_layout = { 'down': '50%' }
-endif
-if has('nvim')
-  let g:fzf_layout = { 'down': '70%' }
-  let g:fzf_preview_window='right:50%'
-endif
+"set rtp+=/usr/local/bin/fzf
+"let $FZF_DEFAULT_COMMAND='rg --files --smart-case'
+"nnoremap <leader>f :Files<Cr>
+"if !has('nvim')
+"  let g:fzf_preview_window='right:40%'
+"  let g:fzf_layout = { 'down': '50%' }
+"endif
+"if has('nvim')
+"  let g:fzf_layout = { 'down': '70%' }
+"  let g:fzf_preview_window='right:50%'
+"endif
 
-function! RipgrepFzf(query, fullscreen)
-  let command_fmt = 'rg --glob --no-ignore -C --column --line-number --no-heading --color=always --smart-case -i -U -- %s || true'
-  let initial_command = printf(command_fmt, shellescape(a:query))
-  let reload_command = printf(command_fmt, '{q}')
-  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
-  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
-endfunction
+"function! RipgrepFzf(query, fullscreen)
+"  let command_fmt = 'rg --glob --no-ignore -C --column --line-number --no-heading --color=always --smart-case -i -U -- %s || true'
+"  let initial_command = printf(command_fmt, shellescape(a:query))
+"  let reload_command = printf(command_fmt, '{q}')
+"  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+"  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+"endfunction
 
-command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
-"maps leader w to open up ripgrep text search
-nmap <leader>w :Rg<Cr>
-"search for things everything that isn't node_modules or in gitignore
-command! -bang -nargs=*  All
-      \ call fzf#run(fzf#wrap({'source': 'rg --files --hidden --no-ignore-vcs --smart-case --glob "!{node_modules/*,.git/*}"', 'down': '40%', 'options': '--expect=ctrl-t,ctrl-x,ctrl-v --multi --reverse' }))
-nnoremap <silent> <leader>o :All<cr>
+"command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
+""maps leader w to open up ripgrep text search
+"nmap <leader>w :Rg<Cr>
+""search for things everything that isn't node_modules or in gitignore
+"command! -bang -nargs=*  All
+"      \ call fzf#run(fzf#wrap({'source': 'rg --files --hidden --no-ignore-vcs --smart-case --glob "!{node_modules/*,.git/*}"', 'down': '40%', 'options': '--expect=ctrl-t,ctrl-x,ctrl-v --multi --reverse' }))
+"nnoremap <silent> <leader>o :All<cr>
 
 
-command! -bang -nargs=*  CustomFiles
-      \ call fzf#run(fzf#wrap({'source': 'rg --files --hidden --smart-case --glob "!{node_modules/*,.git/*}"', 'down': '40%', 'options': '--expect=ctrl-t,ctrl-x,ctrl-v --multi --reverse' }))
-nnoremap <silent> <leader>f :CustomFiles<cr>
+"command! -bang -nargs=*  CustomFiles
+"      \ call fzf#run(fzf#wrap({'source': 'rg --files --hidden --smart-case --glob "!{node_modules/*,.git/*}"', 'down': '40%', 'options': '--expect=ctrl-t,ctrl-x,ctrl-v --multi --reverse' }))
+"nnoremap <silent> <leader>f :CustomFiles<cr>
 
 " move code down or up a line
 nnoremap <C-j> :m .+1<CR>==
